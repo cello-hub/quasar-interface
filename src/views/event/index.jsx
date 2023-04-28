@@ -9,12 +9,12 @@ import {
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md'
-import { getSheepEvents } from '../../api/sheep-event'
+import { getEvents } from '../../api/event'
 import CreateButton from '../../components/create/button'
-import SheepEventForm from './form'
+import EventForm from './form'
 // import CouponerForm from './Form'
 
-export default function SheepEvent() {
+export default function Event() {
   const columnsDataComplex = [
     {
       Header: '名称',
@@ -100,7 +100,7 @@ export default function SheepEvent() {
   }, [])
 
   const getList = () => {
-    getSheepEvents().then((res) => {
+    getEvents().then((res) => {
       setTableData(res)
     })
   }
@@ -131,7 +131,7 @@ export default function SheepEvent() {
         data={tableData}
       ></UniTable>
 
-      <SheepEventForm
+      <EventForm
         isOpen={isOpenForm}
         onClose={onCloseForm}
         item={current}

@@ -19,9 +19,9 @@ import {
 } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import { createSheepEvent, updateSheepEvent } from '../../api/sheep-event'
+import { createEvent, updateEvent } from '../../api/event'
 
-export default function SheepEventForm(props) {
+export default function EventForm(props) {
   const { isOpen, onClose, item } = props
 
   const { handleSubmit, register, control, reset } = useForm()
@@ -52,7 +52,7 @@ export default function SheepEventForm(props) {
     setSubmitting(true)
 
     if (item && item.id) {
-      await updateSheepEvent({
+      await updateEvent({
         id: item.id,
         name: values.account,
         desc: values.platform,
@@ -61,7 +61,7 @@ export default function SheepEventForm(props) {
         remark: values.remark
       })
     } else {
-      await createSheepEvent(values)
+      await createEvent(values)
     }
 
     setSubmitting(false)
