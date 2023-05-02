@@ -79,7 +79,7 @@ export default function SocialForm(props) {
     <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
       <ModalOverlay />
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
           <ModalHeader>{item ? '编辑' : '新增'}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -90,9 +90,11 @@ export default function SocialForm(props) {
             {!item && (
               <Box mt='15px'>
                 <FormLabel fontSize={{ sm: '14px' }}>
-                  <HStack>
+                  <HStack display='inline-flex'>
                     <span>密码</span>
                     <Button
+                      as='div'
+                      cursor='pointer'
                       ml='40px'
                       size='sm'
                       variant='ghost'
