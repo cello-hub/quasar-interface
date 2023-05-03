@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 import AppLayout from './layouts/app'
 import Dashboard from './views/dashboard'
 import Wallet from './views/wallet'
@@ -22,7 +22,7 @@ import Social from './views/social'
 import Cluster from './views/cluster'
 import Event from './views/event'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/app',
     element: <AppLayout />,
