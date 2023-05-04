@@ -126,11 +126,11 @@ export default function SocialForm(props) {
               <FormLabel fontSize={{ sm: '14px' }}>平台</FormLabel>
               {/* <Input {...register('chain_id')}></Input> */}
               <Select {...register('platform')}>
-                <option value='google'>Google</option>
-                <option value='twitter'>Twitter</option>
-                <option value='facebook'>Facebook</option>
-                <option value='telegram'>Telegram</option>
-                <option value='discord'>Discord</option>
+                <option value='Google'>Google</option>
+                <option value='Twitter'>Twitter</option>
+                <option value='Facebook'>Facebook</option>
+                <option value='Telegram'>Telegram</option>
+                <option value='Discord'>Discord</option>
               </Select>
             </Box>
             <Box mt='15px'>
