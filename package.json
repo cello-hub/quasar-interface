@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode dev",
     "build": "vite build --mode prod",
     "preview": "vite preview",
     "test": "react-scripts test",
