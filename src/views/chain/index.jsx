@@ -105,7 +105,7 @@ export default function Nodes() {
         }
         columns={columnsDataComplex}
         data={tableData}
-      ></UniTable>
+      />
 
       <ChainForm
         isOpen={isOpen}
