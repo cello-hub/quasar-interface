@@ -20,7 +20,7 @@ import { AiOutlineStock } from 'react-icons/ai'
 import Market from './views/market'
 import Social from './views/social'
 import Cluster from './views/cluster'
-import Event from './views/event'
+import Ecosystem from './views/ecosystem'
 
 const router = createBrowserRouter([
   {
@@ -83,8 +83,8 @@ const router = createBrowserRouter([
       },
       {
         name: '撸毛事件',
-        path: 'event',
-        element: <Event />,
+        path: 'ecosystem',
+        element: <Ecosystem />,
         icon: <Icon as={MdEvent} width='20px' height='20px' color='inherit' />
       },
       {

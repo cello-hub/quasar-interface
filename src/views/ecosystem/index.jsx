@@ -9,12 +9,12 @@ import {
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md'
-import { getEvents } from '../../api/event'
+import { getEcosystems } from '../../api/ecosystem'
 import CreateButton from '../../components/create/button'
 import EventForm from './form'
 // import CouponerForm from './Form'
 
-export default function Event() {
+export default function Ecosystem() {
   const columnsDataComplex = [
     {
       Header: '名称',
@@ -100,7 +100,7 @@ export default function Event() {
   }, [])
 
   const getList = () => {
-    getEvents().then((res) => {
+    getEcosystems().then((res) => {
       setTableData(res)
     })
   }

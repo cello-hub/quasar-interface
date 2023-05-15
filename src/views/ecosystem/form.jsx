@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import { createEvent, updateEvent } from '../../api/event'
+import { createEcosystem, updateEcosystem } from '../../api/ecosystem'
 
 export default function EventForm(props) {
   const { isOpen, onClose, item } = props
@@ -52,7 +52,7 @@ export default function EventForm(props) {
     setSubmitting(true)
 
     if (item && item.id) {
-      await updateEvent({
+      await updateEcosystem({
         id: item.id,
         name: values.account,
         desc: values.platform,
@@ -61,7 +61,7 @@ export default function EventForm(props) {
         remark: values.remark
       })
     } else {
-      await createEvent(values)
+      await createEcosystem(values)
     }
 
     setSubmitting(false)
