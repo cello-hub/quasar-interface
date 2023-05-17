@@ -55,6 +55,10 @@ export default function Wallet() {
       accessor: 'address'
     },
     {
+      Header: 'EVM',
+      accessor: 'is_evm'
+    },
+    {
       Header: '可用',
       id: 'available',
       Cell: ({ row }) => {
