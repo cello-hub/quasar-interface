@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import type { MenuProps } from 'antd'
 import { routes, RouteProps } from '../../router'
 
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 
 const { Content, Sider } = Layout
 
@@ -25,6 +25,7 @@ function getItem(
 
 export default function AppLayout() {
   const [items, setItems] = useState<MenuItem[]>([])
+  const { pathname } = useLocation()
 
   const buildItems = (route?: RouteProps[]) => {
     const items: any =
@@ -49,12 +50,16 @@ export default function AppLayout() {
     })
   }, [])
 
+  useEffect(() => {
+    console.log(pathname)
+  }, [pathname])
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible style={{ backgroundColor: '#FFFFFF' }}>
         <Menu
           defaultSelectedKeys={['dashboard']}
-          selectedKeys={['ecosystem']}
+          selectedKeys={[pathname.split('/')[2]]}
           mode='inline'
           items={items}
         />
