@@ -1,0 +1,31 @@
+@keyframes ripple_anim {
+  0% {
+    transform: scale(0.1, 0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+  }
+}
+
+.ripple_outer {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid red;
+  opacity: 0;
+  border-radius: 50%;
+  animation: 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite normal
+    none running ripple_anim;
+}
+.ripple_inner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}

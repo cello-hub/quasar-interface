@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'ProtoMono';
+  src: url('../font/ProtoMono-Regular.otf') format(truetype);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProtoMono';
+  src: url('../font/ProtoMono-Bold.otf') format(truetype);
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProtoMono';
+  src: url('../font/ProtoMono-Light.otf') format(truetype);
+  font-weight: lighter;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeeType';
+  src: url('../font/GeeType-Regular.ttf') format(truetype);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeeType';
+  src: url('../font/GeeType-Bold.ttf') format(truetype);
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeeType';
+  src: url('../font/GeeType-Light.ttf') format(truetype);
+  font-weight: lighter;
+  font-style: normal;
+}
+
+* {
+  font-family: 'ProtoMono' !important;
+}
