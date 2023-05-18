@@ -99,9 +99,11 @@ export default function Social() {
     setEditableSocial(social)
   }
 
-  const [isOpenSecertModel, setIsOpenSecertModel] = useState(false)
-  const [secret, setSecret] = useState('')
+  // const [isOpenSecertModel, setIsOpenSecertModel] = useState(false)
+  // const [secret, setSecret] = useState('')
   const onOpenSecretModel = async (social: ISocial) => {
+    console.log(social)
+
     // setIsOpenSecertModel(true)
     // const secret = await getSecret(wallet.id)
     // setSecret(secret)

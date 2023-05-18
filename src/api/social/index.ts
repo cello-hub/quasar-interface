@@ -15,15 +15,15 @@ export const createSocialAccount = (params: ICreateSocialParams) => {
   })
 }
 
-export const updateSocialAccount = (data) => {
-  return Http.put({
-    url: `/social/${data.id}`,
-    data
-  })
-}
+// export const updateSocialAccount = (data) => {
+//   return Http.put({
+//     url: `/social/${data.id}`,
+//     data
+//   })
+// }
 
-export const getPassword = (account) => {
-  return Http.get({
-    url: `/social/password/${account}`
-  })
-}
+// export const getPassword = (account) => {
+//   return Http.get({
+//     url: `/social/password/${account}`
+//   })
+// }

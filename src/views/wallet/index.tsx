@@ -74,7 +74,7 @@ export default function Wallet() {
               color: token.colorPrimary
             }}
           >
-            {record.chain.symbol}
+            {record.chain?.symbol}
           </div>
         )
       }

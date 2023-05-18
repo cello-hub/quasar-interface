@@ -63,13 +63,13 @@ export default function Ecosystem() {
             {record.discord && (
               // <Button shape='circle' icon={<FaDiscord />}></Button>
               <Link to={record.discord} target='_blank'>
-                <FaDiscord />
+                <FaDiscord color={token.colorPrimary} />
               </Link>
             )}
 
             {record.twitter && (
               <Link to={record.twitter} target='_blank'>
-                <FaTwitter />
+                <FaTwitter color={token.colorPrimary} />
               </Link>
             )}
           </Space>

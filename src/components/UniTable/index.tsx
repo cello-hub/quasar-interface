@@ -1,8 +1,7 @@
-import { Table } from 'antd'
-import type { TableProps } from 'antd/es/table'
+import { Table, TableProps } from 'antd'
 
-interface IUniTableProps<T> extends TableProps<T> {}
+interface IUniTableProps extends TableProps<any> {}
 
-export default function UniTable<T>(props: IUniTableProps<T>) {
-  return <Table {...props} bordered />
+export default function UniTable(props: IUniTableProps) {
+  return <Table bordered {...props} />
 }

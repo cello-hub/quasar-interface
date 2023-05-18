@@ -7,7 +7,7 @@ interface IChainState {
   updateChainList: () => void
 }
 
-const useChainStore = create<IChainState>()((set, get) => ({
+const useChainStore = create<IChainState>()((set) => ({
   chainList: [],
   updateChainList: async () => {
     const chainList = await getChainList()
