@@ -1,4 +1,4 @@
-import { Card, Layout, Menu, theme } from 'antd'
+import { Card, Layout, Menu } from 'antd'
 import { useEffect, useState } from 'react'
 import type { MenuProps } from 'antd'
 import { routes, RouteProps } from '../../router'
@@ -54,9 +54,10 @@ export default function AppLayout() {
       <Sider collapsible style={{ backgroundColor: '#FFFFFF' }}>
         <Menu
           defaultSelectedKeys={['dashboard']}
+          selectedKeys={['ecosystem']}
           mode='inline'
           items={items}
-        ></Menu>
+        />
       </Sider>
 
       <Layout>

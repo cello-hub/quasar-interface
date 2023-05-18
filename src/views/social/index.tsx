@@ -90,7 +90,7 @@ export default function Social() {
   ]
 
   const [isOpenForm, setIsOpenForm] = useState(false)
-  const [editableSocial, setEditableSocial] = useState<ISocial | null>()
+  const [editableSocial, setEditableSocial] = useState<ISocial>()
 
   const onUpdate = (social: ISocial) => {
     console.log(social)
@@ -114,7 +114,7 @@ export default function Social() {
         style={{ marginBottom: '10px' }}
         onClick={() => {
           setIsOpenForm(true)
-          setEditableSocial(null)
+          setEditableSocial(undefined)
         }}
       >
         Create Social Account
@@ -129,7 +129,7 @@ export default function Social() {
           setIsOpenForm(false)
           getList()
         }}
-        social={editableSocial!}
+        social={editableSocial}
       />
     </div>
   )
