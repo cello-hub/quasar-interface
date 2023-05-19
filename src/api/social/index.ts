@@ -1,6 +1,6 @@
 import { ISocial } from '../../types/entities/social'
 import Http from '../http'
-import { ICreateSocialParams } from './types'
+import { ICreateSocialParams, IUpdateSocialParams } from './types'
 
 export const getSocialAccounts = (): Promise<ISocial[]> => {
   return Http.get({
@@ -15,15 +15,15 @@ export const createSocialAccount = (params: ICreateSocialParams) => {
   })
 }
 
-// export const updateSocialAccount = (data) => {
-//   return Http.put({
-//     url: `/social/${data.id}`,
-//     data
-//   })
-// }
+export const updateSocialAccount = (id: number, data: IUpdateSocialParams) => {
+  return Http.put({
+    url: `/social/${id}`,
+    data
+  })
+}
 
-// export const getPassword = (account) => {
-//   return Http.get({
-//     url: `/social/password/${account}`
-//   })
-// }
+export const getPassword = (id: number) => {
+  return Http.get({
+    url: `/social/password/${id}`
+  })
+}

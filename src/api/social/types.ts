@@ -7,3 +7,11 @@ export interface ICreateSocialParams {
   available: boolean
   remark: string
 }
+
+export interface IUpdateSocialParams {
+  account: string
+  password: string
+  platform: SocialPlatfromInOne
+  available: boolean
+  remark: string
+}

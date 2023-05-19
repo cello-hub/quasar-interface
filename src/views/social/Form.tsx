@@ -5,8 +5,11 @@ import UniModalForm from '../../components/UniModalForm'
 import { useState } from 'react'
 import { useForm } from 'antd/es/form/Form'
 import TextArea from 'antd/es/input/TextArea'
-import { SocialPlatfromOptions } from '../../constants/social-platform'
-import { createSocialAccount } from '../../api/social'
+import {
+  SocialPlatfrom,
+  SocialPlatfromOptions
+} from '../../constants/social-platform'
+import { createSocialAccount, updateSocialAccount } from '../../api/social'
 
 interface IWalletForm {
   open: boolean
@@ -27,8 +30,14 @@ export default function SocialForm(props: IWalletForm) {
 
   const onOk = async () => {
     setSaving(true)
-    console.log(form.getFieldsValue())
-    await createSocialAccount(form.getFieldsValue())
+    const values = form.getFieldsValue()
+
+    if (!social?.id) {
+      await createSocialAccount(values)
+    } else {
+      // 更新
+      await updateSocialAccount(social!.id, values)
+    }
     setSaving(false)
     props.onSubmitSucceed()
   }
@@ -46,7 +55,11 @@ export default function SocialForm(props: IWalletForm) {
         form={form}
         autoComplete='off'
         labelAlign='right'
-        initialValues={social}
+        initialValues={{
+          ...social,
+          platform: social?.platform ?? SocialPlatfrom[0],
+          available: social?.available ?? true
+        }}
         {...layout}
       >
         <Form.Item label='ACCOUNT' name='account' rules={[{ required: true }]}>

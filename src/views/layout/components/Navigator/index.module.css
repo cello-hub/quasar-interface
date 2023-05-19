@@ -1,9 +1,15 @@
 .navigator {
-  backdrop-filter: blur(24px);
+  backdrop-filter: blur(10px);
+  background: rgba(200, 200, 200, 0.1);
   margin: 16px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 24px;
+}
+
+.nav_title {
+  font-weight: 700;
+  font-size: 28px;
 }

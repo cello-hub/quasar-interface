@@ -8,7 +8,7 @@ import BrandLogo from '../../assets/imgs/ikun.png'
 
 const { Content, Sider, Header } = Layout
 
-type MenuItem = Required<MenuProps>['items'][number]
+type MenuItem = Required<MenuProps>['items'][number] & { name: string }
 
 function getItem(
   label: React.ReactNode,
@@ -20,12 +20,15 @@ function getItem(
     key,
     icon,
     children,
+    name: label,
     label: <Link to={String(key)}>{label}</Link>
   } as MenuItem
 }
 
 export default function AppLayout() {
-  const [items, setItems] = useState<MenuItem[]>([])
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([])
+  const [checkedMenu, setCheckedMenu] = useState<MenuItem>()
+
   const { pathname } = useLocation()
   const { token } = theme.useToken()
 
@@ -47,14 +50,20 @@ export default function AppLayout() {
   useEffect(() => {
     routes.forEach((route) => {
       if (route.path === 'app' && route.children && route.children.length > 0) {
-        setItems(buildItems(route.children))
+        setMenuItems(buildItems(route.children))
       }
     })
   }, [])
 
   useEffect(() => {
-    console.log(pathname)
-  }, [pathname])
+    if (menuItems && menuItems.length > 0) {
+      menuItems.forEach((item) => {
+        if ('/app/' + item?.key === pathname) {
+          setCheckedMenu(item)
+        }
+      })
+    }
+  }, [pathname, menuItems])
 
   return (
     <Layout style={{ minHeight: '100vh' }} hasSider>
@@ -83,7 +92,7 @@ export default function AppLayout() {
           defaultSelectedKeys={['dashboard']}
           selectedKeys={[pathname.split('/')[2]]}
           mode='inline'
-          items={items}
+          items={menuItems}
         />
       </Sider>
 
@@ -98,7 +107,7 @@ export default function AppLayout() {
             lineHeight: 'auto'
           }}
         >
-          <Navigator />
+          <Navigator title={checkedMenu?.name} />
         </Header>
         <Card
           style={{

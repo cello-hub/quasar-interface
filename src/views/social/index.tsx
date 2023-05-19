@@ -4,9 +4,10 @@ import UniTable from '../../components/UniTable'
 import { ColumnsType } from 'antd/es/table'
 import { ISocial } from '../../types/entities/social'
 import { useEffect, useState } from 'react'
-import { getSocialAccounts } from '../../api/social'
+import { getPassword, getSocialAccounts } from '../../api/social'
 import { MdCheck, MdClose, MdEdit, MdKey } from 'react-icons/md'
 import SocialForm from './Form'
+import UniModal from '../../components/UniModal'
 
 export default function Social() {
   const { token } = theme.useToken()
@@ -26,13 +27,21 @@ export default function Social() {
       align: 'center'
     },
     {
+      title: 'ACCOUNT',
+      dataIndex: 'account'
+    },
+    // {
+    //   title: 'PASSWORD',
+    //   dataIndex: 'password',
+    //   width: 120,
+    //   render: (text, record) => {
+    //     return <div>{text}</div>
+    //   }
+    // },
+    {
       title: 'PLATFORM',
       dataIndex: 'platform',
       width: 120
-    },
-    {
-      title: 'ACCOUNT',
-      dataIndex: 'account'
     },
     {
       title: 'AVAILABLE',
@@ -83,20 +92,17 @@ export default function Social() {
   const [editableSocial, setEditableSocial] = useState<ISocial>()
 
   const onUpdate = (social: ISocial) => {
-    console.log(social)
-
     setIsOpenForm(true)
     setEditableSocial(social)
   }
 
-  // const [isOpenSecertModel, setIsOpenSecertModel] = useState(false)
-  // const [secret, setSecret] = useState('')
+  const [isOpenSecertModel, setIsOpenSecertModel] = useState(false)
+  const [secret, setSecret] = useState('')
   const onOpenSecretModel = async (social: ISocial) => {
-    console.log(social)
-
-    // setIsOpenSecertModel(true)
-    // const secret = await getSecret(wallet.id)
-    // setSecret(secret)
+    setIsOpenSecertModel(true)
+    setSecret('')
+    const secret = await getPassword(social.id)
+    setSecret(secret)
   }
   return (
     <div>
@@ -123,6 +129,20 @@ export default function Social() {
         }}
         social={editableSocial}
       />
+
+      <UniModal
+        open={isOpenSecertModel}
+        onCancel={() => setIsOpenSecertModel(false)}
+        title='SECRET'
+        maskClosable={true}
+        footer={null}
+      >
+        {secret ? (
+          <div>{secret}</div>
+        ) : (
+          'An error occurred. The password for this account cannot be viewed'
+        )}
+      </UniModal>
     </div>
   )
 }

@@ -1,16 +1,19 @@
 import { ColorPicker } from 'antd'
 import styles from './index.module.css'
 import useThemeStore from '../../../../store/useThemeStore'
+import { throttle } from 'lodash-es'
 
-export default function Navigator() {
+export default function Navigator(props: { title?: string }) {
   const updateColorPrimary = useThemeStore((state) => state.updateColorPrimary)
+
+  const onUpdateColor = throttle((hex: string) => updateColorPrimary(hex), 300)
   return (
     <div className={styles.navigator}>
-      <div className=''>标题</div>
+      <div className={styles.nav_title}>{props.title}</div>
 
       <div>
         <ColorPicker
-          onChange={(_, hex) => updateColorPrimary(hex)}
+          onChange={(_, hex) => onUpdateColor(hex)}
           presets={[
             {
               label: 'Recommended',
