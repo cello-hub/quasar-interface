@@ -5,7 +5,6 @@ import { ColumnsType } from 'antd/es/table'
 import { ISocial } from '../../types/entities/social'
 import { useEffect, useState } from 'react'
 import { getSocialAccounts } from '../../api/social'
-import dayjs from 'dayjs'
 import { MdCheck, MdClose, MdEdit, MdKey } from 'react-icons/md'
 import SocialForm from './Form'
 
@@ -14,17 +13,7 @@ export default function Social() {
   const [socialAccounts, setSocialAccounts] = useState<ISocial[]>([])
   const getList = async () => {
     const socialAccounts = await getSocialAccounts()
-    setSocialAccounts(
-      socialAccounts.map((socialAccount) => {
-        socialAccount.created_at = dayjs(socialAccount.created_at).format(
-          'YYYY-MM-DD HH:mm:ss'
-        )
-        socialAccount.updated_at = dayjs(socialAccount.updated_at).format(
-          'YYYY-MM-DD HH:mm:ss'
-        )
-        return socialAccount
-      })
-    )
+    setSocialAccounts(socialAccounts)
   }
   useEffect(() => {
     getList()
@@ -68,6 +57,7 @@ export default function Social() {
     {
       title: 'OPERATION',
       dataIndex: 'operation',
+      align: 'center',
       render: (_, record) => {
         return (
           <Space wrap>

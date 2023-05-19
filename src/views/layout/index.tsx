@@ -1,11 +1,12 @@
-import { Card, Layout, Menu } from 'antd'
+import { Card, Layout, Menu, theme } from 'antd'
 import { useEffect, useState } from 'react'
 import type { MenuProps } from 'antd'
 import { routes, RouteProps } from '../../router'
-
 import { Link, Outlet, useLocation } from 'react-router-dom'
+import Navigator from './components/Navigator'
+import BrandLogo from '../../assets/imgs/ikun.png'
 
-const { Content, Sider } = Layout
+const { Content, Sider, Header } = Layout
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -26,6 +27,7 @@ function getItem(
 export default function AppLayout() {
   const [items, setItems] = useState<MenuItem[]>([])
   const { pathname } = useLocation()
+  const { token } = theme.useToken()
 
   const buildItems = (route?: RouteProps[]) => {
     const items: any =
@@ -55,8 +57,28 @@ export default function AppLayout() {
   }, [pathname])
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible style={{ backgroundColor: '#FFFFFF' }}>
+    <Layout style={{ minHeight: '100vh' }} hasSider>
+      <Sider
+        style={{
+          backgroundColor: token.colorBgContainer,
+          height: '100vh',
+          position: 'sticky',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          overflow: 'auto'
+        }}
+      >
+        <div
+          style={{
+            margin: '32px',
+            marginBottom: '8px',
+            overflow: 'hidden',
+            borderRadius: '8px'
+          }}
+        >
+          <img src={BrandLogo} width='100%' />
+        </div>
         <Menu
           defaultSelectedKeys={['dashboard']}
           selectedKeys={[pathname.split('/')[2]]}
@@ -66,9 +88,21 @@ export default function AppLayout() {
       </Sider>
 
       <Layout>
+        <Header
+          style={{
+            background: 'transparent',
+            position: 'sticky',
+            top: 0,
+            padding: 0,
+            zIndex: 1,
+            lineHeight: 'auto'
+          }}
+        >
+          <Navigator />
+        </Header>
         <Card
           style={{
-            margin: '16px'
+            margin: '24px 16px 16px'
           }}
         >
           <Content>

@@ -1,0 +1,9 @@
+.navigator {
+  backdrop-filter: blur(24px);
+  margin: 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}

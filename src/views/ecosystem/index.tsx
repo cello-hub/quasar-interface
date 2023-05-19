@@ -55,7 +55,8 @@ export default function Ecosystem() {
     },
     {
       title: 'SOCIAL',
-      dataIndex: '',
+      dataIndex: 'social',
+      align: 'center',
       key: 'social',
       render: (_, record) => {
         return (
@@ -95,6 +96,7 @@ export default function Ecosystem() {
     {
       title: 'OPERATION',
       key: 'operation',
+      align: 'center',
       render: (_, record) => {
         return (
           <Space wrap>
@@ -125,7 +127,7 @@ export default function Ecosystem() {
           setEditableEcosystem(undefined)
         }}
       />
-      <UniTable columns={columns} dataSource={ecosystemList} />
+      <UniTable columns={columns} dataSource={ecosystemList} rowKey={'id'} />
 
       <EcosystemForm
         open={isOpenForm}

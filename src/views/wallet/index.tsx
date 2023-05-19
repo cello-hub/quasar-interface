@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createWallet, getSecret, getWallets } from '../../api/wallet'
 import { Button, Popconfirm, Space, theme } from 'antd'
-import dayjs from 'dayjs'
 import { PlusOutlined } from '@ant-design/icons'
 import UniTable from '../../components/UniTable'
 import { ColumnsType } from 'antd/es/table'
@@ -18,18 +17,7 @@ export default function Wallet() {
   const getList = async () => {
     const wallets = await getWallets()
 
-    setWalletList(
-      wallets.map((wallet) => {
-        // wallet.loading = false
-        wallet.created_at = dayjs(wallet.created_at).format(
-          'YYYY-MM-DD HH:mm:ss'
-        )
-        wallet.updated_at = dayjs(wallet.updated_at).format(
-          'YYYY-MM-DD HH:mm:ss'
-        )
-        return wallet
-      })
-    )
+    setWalletList(wallets)
   }
 
   const columns: ColumnsType<IWallet> = [
@@ -87,6 +75,7 @@ export default function Wallet() {
     {
       title: 'OPERATION',
       dataIndex: 'operation',
+      align: 'center',
       render: (_, record) => {
         return (
           <Space wrap>

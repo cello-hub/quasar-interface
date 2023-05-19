@@ -6,12 +6,14 @@ import router from './router.tsx'
 import 'normalize.css'
 import './assets/css/common.css'
 import useChainStore from './store/useChainStore.ts'
+import useThemeStore from './store/useThemeStore.ts'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 const App = () => {
-  // useChainStore().updateChainList()
   const updateChainList = useChainStore((state) => state.updateChainList)
+  const colorPrimary = useThemeStore((state) => state.colorPrimary)
+
   useEffect(() => {
     updateChainList()
   }, [])
@@ -20,7 +22,7 @@ const App = () => {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: '#00B96B'
+            colorPrimary: colorPrimary
           }
         }}
       >
