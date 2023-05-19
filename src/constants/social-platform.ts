@@ -3,7 +3,16 @@ export const SocialPlatfrom = [
   'Twitter',
   'Facebook',
   'Discord',
-  'Telegram'
+  'Telegram',
+  'Okx',
+  'Binance',
+  'Bybit',
+  'Mexc',
+  'Gate',
+  'Twitch',
+  'Aws Builder',
+  'Aws Cloud',
+  'AdsPower'
 ] as const
 
 export type SocialPlatfromInOne = (typeof SocialPlatfrom)[number]

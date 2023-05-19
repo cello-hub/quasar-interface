@@ -35,7 +35,7 @@ export default function EcosystemForm(props: IEcosystemProps) {
         chainList.map((chain) => {
           return {
             label: chain.topic,
-            value: chain.id
+            value: String(chain.id)
           }
         })
       )
