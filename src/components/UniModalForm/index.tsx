@@ -7,7 +7,14 @@ interface IUniModalFormProps extends FormProps {
 
 export default function UniModalForm(props: IUniModalFormProps) {
   return (
-    <Form preserve={false} autoComplete='off' labelAlign='right' {...props}>
+    <Form
+      preserve={false}
+      autoComplete='off'
+      labelAlign='right'
+      labelWrap
+      colon={false}
+      {...props}
+    >
       {props.children}
     </Form>
   )

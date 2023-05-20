@@ -1,6 +1,5 @@
 import { Button, Space, theme } from 'antd'
 import UniTable from '../../components/UniTable'
-import { PlusOutlined } from '@ant-design/icons'
 import { useEffect, useState } from 'react'
 import { IEcosystem } from '../../types/entities/ecosystem'
 import EcosystemForm from './Form'
@@ -8,7 +7,8 @@ import { getEcosystems } from '../../api/ecosystem'
 import { ColumnsType } from 'antd/es/table'
 import { Link } from 'react-router-dom'
 import { FaDiscord, FaTwitter } from 'react-icons/fa'
-import { MdEdit } from 'react-icons/md'
+import EditIcon from '../../components/Icon/EditIcon'
+import CreateIcon from '../../components/Icon/CreateIcon'
 
 export default function Ecosystem() {
   const { token } = theme.useToken()
@@ -103,7 +103,7 @@ export default function Ecosystem() {
             <Button
               size='small'
               type='link'
-              icon={<MdEdit />}
+              icon={<EditIcon />}
               onClick={() => onUpdate(record)}
             />
           </Space>
@@ -119,7 +119,7 @@ export default function Ecosystem() {
   return (
     <div>
       <Button
-        icon={<PlusOutlined />}
+        icon={<CreateIcon />}
         type='primary'
         style={{ marginBottom: '10px' }}
         onClick={() => {

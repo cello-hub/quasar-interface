@@ -1,6 +1,6 @@
 import Http from '../http'
 import { IWallet } from './../../types/entities/wallet'
-import { IUpdateWalletParams, IWalletListParams } from './type'
+import { IUpdateWalletParams, IWalletListParams } from './types'
 
 export const getWallets = (params?: IWalletListParams): Promise<IWallet[]> => {
   return Http.get({
@@ -15,6 +15,7 @@ export const updateWallet = (params: IUpdateWalletParams) => {
     data: params
   })
 }
+
 export const createWallet = () => {
   return Http.post({
     url: '/wallet'

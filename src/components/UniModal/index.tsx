@@ -1,5 +1,5 @@
 import { Modal, ModalProps } from 'antd'
-import { CloseIcon } from '../Icon'
+import { CloseIcon } from '../Icon/CloseIcon'
 
 export default function UniModal(props: ModalProps) {
   return (

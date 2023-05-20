@@ -10,11 +10,14 @@ import {
   MdEvent,
   MdList
 } from 'react-icons/md'
+import { BsCurrencyBitcoin } from 'react-icons/bs'
+
 import Ecosystem from './views/ecosystem'
 import Wallet from './views/wallet'
 import Social from './views/social'
 import Cluster from './views/cluster'
 import Couponer from './views/couponer'
+import Token from './views/token'
 
 export interface RouteProps {
   name: string
@@ -41,6 +44,12 @@ export const routes: RouteProps[] = [
         path: 'ecosystem',
         icon: <MdEvent />,
         element: <Ecosystem />
+      },
+      {
+        name: 'Token',
+        path: 'token',
+        icon: <BsCurrencyBitcoin />,
+        element: <Token />
       },
       {
         name: 'Wallet',

@@ -1,16 +1,18 @@
-import { PlusOutlined } from '@ant-design/icons'
-import { Button, Space, theme } from 'antd'
+import { Button, Space } from 'antd'
 import UniTable from '../../components/UniTable'
 import { ColumnsType } from 'antd/es/table'
 import { ISocial } from '../../types/entities/social'
 import { useEffect, useState } from 'react'
 import { getPassword, getSocialAccounts } from '../../api/social'
-import { MdCheck, MdClose, MdEdit, MdKey } from 'react-icons/md'
 import SocialForm from './Form'
 import UniModal from '../../components/UniModal'
+import ConfirmIcon from '../../components/Icon/ConfirmIcon'
+import ErrorIcon from '../../components/Icon/ErrorIcon'
+import EditIcon from '../../components/Icon/EditIcon'
+import KeyIcon from '../../components/Icon/KeyIcon'
+import CreateIcon from '../../components/Icon/CreateIcon'
 
 export default function Social() {
-  const { token } = theme.useToken()
   const [socialAccounts, setSocialAccounts] = useState<ISocial[]>([])
   const getList = async () => {
     const socialAccounts = await getSocialAccounts()
@@ -50,9 +52,9 @@ export default function Social() {
       align: 'center',
       render: (available) => {
         if (available) {
-          return <MdCheck color={token.colorPrimary} />
+          return <ConfirmIcon />
         }
-        return <MdClose color={token.colorError} />
+        return <ErrorIcon />
       }
     },
     {
@@ -73,13 +75,13 @@ export default function Social() {
             <Button
               size='small'
               type='link'
-              icon={<MdEdit />}
+              icon={<EditIcon />}
               onClick={() => onUpdate(record)}
             />
             <Button
               size='small'
               type='link'
-              icon={<MdKey />}
+              icon={<KeyIcon />}
               onClick={() => onOpenSecretModel(record)}
             />
           </Space>
@@ -107,7 +109,7 @@ export default function Social() {
   return (
     <div>
       <Button
-        icon={<PlusOutlined />}
+        icon={<CreateIcon />}
         type='primary'
         style={{ marginBottom: '10px' }}
         onClick={() => {

@@ -1,5 +1,5 @@
 import { IEcosystem } from '../../types/entities/ecosystem'
-import http from '../http'
+import Http from '../http'
 import {
   ICreateEcosystemParams,
   IEcosystemListParams,
@@ -9,21 +9,21 @@ import {
 export const getEcosystems = (
   params?: IEcosystemListParams
 ): Promise<IEcosystem[]> => {
-  return http.get({
+  return Http.get({
     url: '/ecosystem',
     data: params
   })
 }
 
 export const createEcosystem = (data: ICreateEcosystemParams) => {
-  return http.post({
+  return Http.post({
     url: '/ecosystem',
     data
   })
 }
 
 export const updateEcosystem = (data: IUpdateEcosystemParams) => {
-  return http.put({
+  return Http.put({
     url: `/ecosystem/${data.id}`,
     data
   })
