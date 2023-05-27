@@ -18,9 +18,10 @@ import Social from './views/social'
 import Cluster from './views/cluster'
 import Couponer from './views/couponer'
 import Token from './views/token'
+import Login from './views/login'
 
 export interface RouteProps {
-  name: string
+  name?: string
   path: string
   element: React.ReactNode
   icon?: React.ReactNode
@@ -76,6 +77,10 @@ export const routes: RouteProps[] = [
         element: <Couponer />
       }
     ]
+  },
+  {
+    path: 'login',
+    element: <Login />
   }
 ]
 
