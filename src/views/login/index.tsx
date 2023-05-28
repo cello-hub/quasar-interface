@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import styles from './index.module.css'
 import { Connector, useAccount, useConnect, useSignMessage } from 'wagmi'
-import { login } from '../../api/user'
+import { login } from '../../api/auth'
 
 export default function Login() {
   const { connectAsync, connectors, isLoading, pendingConnector } = useConnect()

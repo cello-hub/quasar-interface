@@ -3,7 +3,7 @@ import { ILoginParams } from './types'
 
 export const login = (data: ILoginParams) => {
   return Http.post({
-    url: '/user/login',
+    url: '/auth/login',
     data
   })
 }

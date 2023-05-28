@@ -22,19 +22,19 @@ const App = () => {
   const colorPrimary = useThemeStore((state) => state.colorPrimary)
 
   return (
-    <React.StrictMode>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: colorPrimary
-          }
-        }}
-      >
-        <WagmiConfig config={config}>
-          <RouterProvider router={router} />
-        </WagmiConfig>
-      </ConfigProvider>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: colorPrimary
+        }
+      }}
+    >
+      <WagmiConfig config={config}>
+        <RouterProvider router={router} />
+      </WagmiConfig>
+    </ConfigProvider>
+    // </React.StrictMode>
   )
 }
 

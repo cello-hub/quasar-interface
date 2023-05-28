@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 import { get } from 'lodash-es'
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
@@ -73,7 +73,12 @@ class Http {
         }
         return Promise.reject(response.data)
       },
-      (error) => {
+      (error: AxiosError) => {
+        console.log(error)
+        if (error.response?.status === 401) {
+          window.location.href = '/login'
+          return Promise.reject()
+        }
         return Promise.reject(error)
       }
     )
