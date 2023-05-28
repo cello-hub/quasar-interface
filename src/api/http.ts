@@ -67,6 +67,10 @@ class Http {
       (response) => {
         const code = get(response, 'data.code', 0)
         if (code === 200) return response
+        if (code === 401) {
+          window.location.href = '/login'
+          return Promise.reject()
+        }
         return Promise.reject(response.data)
       },
       (error) => {
@@ -83,6 +87,7 @@ class Http {
     if (!this.axiosInstance) {
       this.axiosInstance = axios.create({
         timeout: 10000,
+        withCredentials: true,
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
       })
       // 设置拦截器

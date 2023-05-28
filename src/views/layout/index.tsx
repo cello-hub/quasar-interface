@@ -5,6 +5,7 @@ import { routes, RouteProps } from '../../router'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import Navigator from './components/Navigator'
 import BrandLogo from '../../assets/imgs/ikun.png'
+import useChainStore from '../../store/useChainStore'
 
 const { Content, Sider, Header } = Layout
 
@@ -64,6 +65,11 @@ export default function AppLayout() {
       })
     }
   }, [pathname, menuItems])
+
+  const updateChainList = useChainStore((state) => state.updateChainList)
+  useEffect(() => {
+    updateChainList()
+  }, [])
 
   return (
     <Layout style={{ minHeight: '100vh' }} hasSider>
