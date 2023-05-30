@@ -7,7 +7,6 @@ import CopyIcon from '../../components/Icon/CopyIcon'
 import { IMnemonic } from '../../types/entities/mnemonic'
 import { deleteMnemonic, getMnemonicList } from '../../api/mnemonic'
 import MnemonicForm from './Form'
-import { MdDelete } from 'react-icons/md'
 import DeleteIcon from '../../components/Icon/DeleteIcon'
 
 export default function Mnemonic() {
