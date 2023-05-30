@@ -1,15 +1,15 @@
-import { Form, Input, Radio } from 'antd'
-import { IWallet } from '../../types/entities/wallet'
+import { Form, Input, Select } from 'antd'
 import UniModal from '../../components/UniModal'
 import UniModalForm from '../../components/UniModalForm'
 import { useState } from 'react'
-import { updateWallet } from '../../api/wallet'
 import { useForm } from 'antd/es/form/Form'
+import useChainStore from '../../store/useChainStore'
+import { ICreateMnemonicParams } from '../../api/mnemonic/types'
+import { createMnemonic } from '../../api/mnemonic'
 
 interface IWalletForm {
   open: boolean
   onCloseFormModal: () => void
-  wallet: IWallet
   onSubmitSucceed: () => void
 }
 
@@ -18,19 +18,17 @@ const layout = {
   wrapperCol: { span: 19 }
 }
 
-export default function WalletForm(props: IWalletForm) {
-  const { wallet } = props
+export default function MnemonicForm(props: IWalletForm) {
   const [saving, setSaving] = useState(false)
-  const [form] = useForm<IWallet>()
+  const [form] = useForm<ICreateMnemonicParams>()
+
+  const chainOptions = useChainStore((state) => state.chainOptions)
 
   const onOk = async () => {
     setSaving(true)
-    const { alias, available } = form.getFieldsValue()
-    await updateWallet({
-      id: wallet.id,
-      alias,
-      available
-    })
+    const values = form.getFieldsValue()
+
+    await createMnemonic(values)
     setSaving(false)
     props.onSubmitSucceed()
   }
@@ -48,19 +46,14 @@ export default function WalletForm(props: IWalletForm) {
         form={form}
         autoComplete='off'
         labelAlign='right'
-        initialValues={wallet}
         {...layout}
       >
-        <Form.Item label='ADDRESS'>{wallet?.address}</Form.Item>
-        <Form.Item label='ALIAS' name='alias'>
+        <Form.Item label='PHRASE' name='phrase'>
           <Input />
         </Form.Item>
 
-        <Form.Item label='AVAILABLE' name='available'>
-          <Radio.Group>
-            <Radio value={true}>YES</Radio>
-            <Radio value={false}>NO</Radio>
-          </Radio.Group>
+        <Form.Item label='Chain' name='chain_id' valuePropName='chain.topic'>
+          <Select options={chainOptions} />
         </Form.Item>
       </UniModalForm>
     </UniModal>

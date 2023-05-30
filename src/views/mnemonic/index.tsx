@@ -5,7 +5,10 @@ import UniTable from '../../components/UniTable'
 import { ColumnsType } from 'antd/es/table'
 import CopyIcon from '../../components/Icon/CopyIcon'
 import { IMnemonic } from '../../types/entities/mnemonic'
-import { getMnemonicList } from '../../api/mnemonic'
+import { deleteMnemonic, getMnemonicList } from '../../api/mnemonic'
+import MnemonicForm from './Form'
+import { MdDelete } from 'react-icons/md'
+import DeleteIcon from '../../components/Icon/DeleteIcon'
 
 export default function Mnemonic() {
   const [mnemonicList, setMnemonicList] = useState<IMnemonic[]>([])
@@ -53,6 +56,12 @@ export default function Mnemonic() {
         return (
           <Space wrap>
             <Button size='small' type='link' icon={<CopyIcon />} />
+            <Popconfirm
+              title='Confirm to delete?'
+              onConfirm={() => onDelete(record)}
+            >
+              <Button size='small' type='link' icon={<DeleteIcon />} />
+            </Popconfirm>
           </Space>
         )
       }
@@ -63,34 +72,35 @@ export default function Mnemonic() {
     getList()
   }, [])
 
+  const [isOpenForm, setIsOpenForm] = useState(false)
   const onCreate = async () => {
-    // await createWallet()
+    setIsOpenForm(true)
+  }
+
+  const onDelete = async (mnemonic: IMnemonic) => {
+    await deleteMnemonic(mnemonic.id)
     getList()
   }
 
   return (
     <div>
-      <Popconfirm title='Create Wallet' onConfirm={onCreate}>
-        <Button
-          icon={<PlusOutlined />}
-          type='primary'
-          style={{ marginBottom: '10px' }}
-        >
-          Create EVM Wallet
-        </Button>
-      </Popconfirm>
+      <Button
+        icon={<PlusOutlined />}
+        type='primary'
+        style={{ marginBottom: '10px' }}
+        onClick={onCreate}
+      />
 
       <UniTable dataSource={mnemonicList} columns={columns} rowKey={'id'} />
 
-      {/* <WalletForm
+      <MnemonicForm
         open={isOpenForm}
         onCloseFormModal={() => setIsOpenForm(false)}
         onSubmitSucceed={() => {
           setIsOpenForm(false)
           getList()
         }}
-        wallet={editableMnemonic!}
-      /> */}
+      />
 
       {/* <UniModal
         open={isOpenSecertModel}

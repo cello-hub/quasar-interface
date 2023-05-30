@@ -1,8 +1,24 @@
-import { Mnemonic } from '../../types/entities/mnemonic'
+import { IMnemonic } from '../../types/entities/mnemonic'
 import Http from '../http'
+import { ICreateMnemonicParams } from './types'
 
-export const getMnemonicList = (): Promise<Mnemonic[]> => {
+export const getMnemonicList = (): Promise<IMnemonic[]> => {
   return Http.get({
     url: 'mnemonic'
+  })
+}
+
+export const createMnemonic = (
+  data: ICreateMnemonicParams
+): Promise<IMnemonic> => {
+  return Http.post({
+    url: 'mnemonic',
+    data
+  })
+}
+
+export const deleteMnemonic = (id: number) => {
+  return Http.delete({
+    url: `mnemonic/${id}`
   })
 }
