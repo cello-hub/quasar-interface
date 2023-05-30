@@ -19,6 +19,7 @@ import Cluster from './views/cluster'
 import Couponer from './views/couponer'
 import Token from './views/token'
 import Login from './views/login'
+import Mnemonic from './views/mnemonic'
 
 export interface RouteProps {
   name?: string
@@ -51,6 +52,12 @@ export const routes: RouteProps[] = [
         path: 'token',
         icon: <BsCurrencyBitcoin />,
         element: <Token />
+      },
+      {
+        name: 'Mnemonic',
+        path: 'mnemonic',
+        icon: <MdWallet />,
+        element: <Mnemonic />
       },
       {
         name: 'Wallet',
