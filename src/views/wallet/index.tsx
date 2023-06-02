@@ -36,6 +36,14 @@ export default function Wallet() {
       width: 150
     },
     {
+      title: 'MNEMONIC',
+      dataIndex: 'mnemonic',
+      align: 'center',
+      render: (mnemonic) => {
+        return <div>{mnemonic ? mnemonic.id : '-'}</div>
+      }
+    },
+    {
       title: 'AVAILABLE',
       dataIndex: 'available',
       width: 100,

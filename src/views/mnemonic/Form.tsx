@@ -18,6 +18,8 @@ const layout = {
   wrapperCol: { span: 19 }
 }
 
+const { TextArea } = Input
+
 export default function MnemonicForm(props: IWalletForm) {
   const [saving, setSaving] = useState(false)
   const [form] = useForm<ICreateMnemonicParams>()
@@ -49,7 +51,7 @@ export default function MnemonicForm(props: IWalletForm) {
         {...layout}
       >
         <Form.Item label='PHRASE' name='phrase'>
-          <Input />
+          <TextArea rows={4} />
         </Form.Item>
 
         <Form.Item label='Chain' name='chain_id' valuePropName='chain.topic'>

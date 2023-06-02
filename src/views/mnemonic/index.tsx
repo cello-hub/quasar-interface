@@ -27,11 +27,10 @@ export default function Mnemonic() {
     },
     {
       title: 'PHRASE',
-      dataIndex: 'phrase',
-      align: 'center'
+      dataIndex: 'phrase'
     },
     {
-      title: 'CREATE DATE',
+      title: 'CHAIN',
       dataIndex: 'chain',
       width: 250,
       align: 'center',
@@ -90,7 +89,12 @@ export default function Mnemonic() {
         onClick={onCreate}
       />
 
-      <UniTable dataSource={mnemonicList} columns={columns} rowKey={'id'} />
+      <UniTable
+        dataSource={mnemonicList}
+        columns={columns}
+        rowKey={'id'}
+        pagination={false}
+      />
 
       <MnemonicForm
         open={isOpenForm}
