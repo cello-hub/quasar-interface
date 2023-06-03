@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Button, Popconfirm, Space, theme } from 'antd'
+import { Button, Space, theme } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import UniTable from '../../components/UniTable'
 import { ColumnsType } from 'antd/es/table'
 import CopyIcon from '../../components/Icon/CopyIcon'
 import { IMnemonic } from '../../types/entities/mnemonic'
-import { deleteMnemonic, getMnemonicList } from '../../api/mnemonic'
+import { createWallet, getMnemonicList } from '../../api/mnemonic'
 import MnemonicForm from './Form'
-import DeleteIcon from '../../components/Icon/DeleteIcon'
+import CreateIcon from '../../components/Icon/CreateIcon'
 
 export default function Mnemonic() {
   const [mnemonicList, setMnemonicList] = useState<IMnemonic[]>([])
@@ -54,12 +54,12 @@ export default function Mnemonic() {
         return (
           <Space wrap>
             <Button size='small' type='link' icon={<CopyIcon />} />
-            <Popconfirm
-              title='Confirm to delete?'
-              onConfirm={() => onDelete(record)}
-            >
-              <Button size='small' type='link' icon={<DeleteIcon />} />
-            </Popconfirm>
+            <Button
+              size='small'
+              type='link'
+              icon={<CreateIcon />}
+              onClick={() => onCreateWallet(record)}
+            />
           </Space>
         )
       }
@@ -75,11 +75,10 @@ export default function Mnemonic() {
     setIsOpenForm(true)
   }
 
-  const onDelete = async (mnemonic: IMnemonic) => {
-    await deleteMnemonic(mnemonic.id)
+  const onCreateWallet = async (mnemonic: IMnemonic) => {
+    await createWallet(mnemonic.id)
     getList()
   }
-
   return (
     <div>
       <Button

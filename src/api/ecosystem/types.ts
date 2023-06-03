@@ -13,8 +13,6 @@ export interface ICreateEcosystemParams {
   remark: string
 }
 
-export interface IUpdateEcosystemParams {
+export interface IUpdateEcosystemParams extends ICreateEcosystemParams {
   id: number
-  alias: string
-  available: boolean
 }

@@ -22,3 +22,12 @@ export const deleteMnemonic = (id: number) => {
     url: `mnemonic/${id}`
   })
 }
+
+export const createWallet = (mnemonicId: number) => {
+  return Http.post({
+    url: `mnemonic/create_wallet`,
+    data: {
+      mnemonicId
+    }
+  })
+}

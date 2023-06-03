@@ -6,7 +6,7 @@ import { useForm } from 'antd/es/form/Form'
 import { IEcosystem } from '../../types/entities/ecosystem'
 import TextArea from 'antd/es/input/TextArea'
 import useChainStore from '../../store/useChainStore'
-import { createEcosystem } from '../../api/ecosystem'
+import { createEcosystem, updateEcosystem } from '../../api/ecosystem'
 
 interface IEcosystemProps {
   open: boolean
@@ -45,10 +45,20 @@ export default function EcosystemForm(props: IEcosystemProps) {
   const onOk = async () => {
     setSaving(true)
     const filedsValue = form.getFieldsValue()
-    await createEcosystem({
-      ...filedsValue,
-      chain_id: form.getFieldValue('chain_id')
-    })
+
+    if (ecosystem?.id) {
+      await updateEcosystem({
+        ...filedsValue,
+        id: ecosystem.id,
+        chain_id: form.getFieldValue('chain_id')
+      })
+    } else {
+      await createEcosystem({
+        ...filedsValue,
+        chain_id: form.getFieldValue('chain_id')
+      })
+    }
+
     setSaving(false)
     props.onSubmitSucceed()
   }

@@ -49,8 +49,9 @@ export default function Ecosystem() {
     {
       title: 'CHAIN',
       dataIndex: 'chain',
+      align: 'center',
       render: (chain) => {
-        return <div>{chain.topic}</div>
+        return <div>{chain?.topic || '-'}</div>
       }
     },
     {
