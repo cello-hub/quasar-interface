@@ -5,5 +5,7 @@ export interface IChain extends IBaseEntity {
   chain_id: number
   hex_chain_id: string
   symbol: string
+  evm: boolean
+  testnet: boolean
   explorer: string
 }
