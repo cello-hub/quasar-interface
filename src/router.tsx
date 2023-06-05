@@ -5,12 +5,12 @@ import Dashboard from './views/dashboard'
 import {
   MdGroupWork,
   MdHome,
-  MdSocialDistance,
   MdWallet,
   MdEvent,
-  MdList
+  MdNoteAlt
 } from 'react-icons/md'
-import { BsCurrencyBitcoin } from 'react-icons/bs'
+import { IoEarthSharp } from 'react-icons/io5'
+import { FaBitcoin, FaTasks, FaUserFriends } from 'react-icons/fa'
 
 import Ecosystem from './views/ecosystem'
 import Wallet from './views/wallet'
@@ -45,7 +45,7 @@ export const routes: RouteProps[] = [
       {
         name: 'Chain',
         path: 'chain',
-        icon: <MdHome />,
+        icon: <IoEarthSharp />,
         element: <Chain />
       },
       {
@@ -57,13 +57,13 @@ export const routes: RouteProps[] = [
       {
         name: 'Token',
         path: 'token',
-        icon: <BsCurrencyBitcoin />,
+        icon: <FaBitcoin />,
         element: <Token />
       },
       {
         name: 'Mnemonic',
         path: 'mnemonic',
-        icon: <MdWallet />,
+        icon: <MdNoteAlt />,
         element: <Mnemonic />
       },
       {
@@ -75,7 +75,7 @@ export const routes: RouteProps[] = [
       {
         name: 'Social',
         path: 'social',
-        icon: <MdSocialDistance />,
+        icon: <FaUserFriends />,
         element: <Social />
       },
       {
@@ -87,7 +87,7 @@ export const routes: RouteProps[] = [
       {
         name: 'Couponer',
         path: 'couponer',
-        icon: <MdList />,
+        icon: <FaTasks />,
         element: <Couponer />
       }
     ]
