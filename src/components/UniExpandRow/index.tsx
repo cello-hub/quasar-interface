@@ -6,7 +6,7 @@ export default function UniExpandRow(props: UniExpandRowProps) {
   return (
     <div
       style={{
-        marginLeft: '34px'
+        margin: '20px 60px'
       }}
     >
       {props.children}

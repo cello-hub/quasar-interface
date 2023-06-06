@@ -13,9 +13,6 @@ import useEdit from '../../hooks/useEdit'
 import ChainForm from './Form'
 import UniExpandRow from '../../components/UniExpandRow'
 import RpcList from './RpcList'
-import { useState } from 'react'
-import RpcNodeForm from './RpcNodeForm'
-import { IRpcNode } from '../../types/entities/rpc-node'
 
 export default function Chain() {
   const { token } = theme.useToken()

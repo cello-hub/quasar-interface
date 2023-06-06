@@ -7,7 +7,6 @@ import { Button, Space } from 'antd'
 import { getRpcNodeList } from '../../api/rpc-node'
 import RpcNodeForm from './RpcNodeForm'
 import { ColumnsType } from 'antd/es/table'
-import EditIcon from '../../components/Icon/EditIcon'
 import { setDefaultRpcUrl } from '../../api/chain'
 
 type RpcListProps = {
@@ -68,7 +67,6 @@ export default function RpcList(props: RpcListProps) {
     const list = await getRpcNodeList(props.chain.id)
 
     setRpcList(list)
-
     setLoading(false)
   }
 
@@ -81,7 +79,6 @@ export default function RpcList(props: RpcListProps) {
   const [isOpenRpcNodeForm, setIsOpenRpcNodeForm] = useState(false)
   const [rpcNode, setRpcNode] = useState<IRpcNode>()
   const onCreateRpcNode = async (chainId: number) => {
-    console.log(chainId)
     setIsOpenRpcNodeForm(true)
   }
 
@@ -99,14 +96,18 @@ export default function RpcList(props: RpcListProps) {
   ) : (
     <div>
       <Button type='primary' onClick={() => onCreateRpcNode(props.chain.id)}>
-        create node
+        add rpc url
       </Button>
-      <UniTable
-        bordered={false}
-        pagination={false}
-        dataSource={rpcList}
-        columns={columns}
-      />
+      {rpcList && rpcList.length > 0 && (
+        <UniTable
+          size='small'
+          bordered={false}
+          pagination={false}
+          dataSource={rpcList}
+          columns={columns}
+          rowKey={'id'}
+        />
+      )}
 
       <RpcNodeForm
         open={isOpenRpcNodeForm}

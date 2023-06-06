@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import UniModal from '../../components/UniModal'
 import UniModalForm from '../../components/UniModalForm'
 import { Form, Input } from 'antd'
@@ -22,13 +22,19 @@ const layout = {
 export default function RpcNodeForm(props: IRpcNodeFormProps) {
   const [saving, setSaving] = useState(false)
 
+  const [form] = useForm<ISaveRpcNodeParams>()
+
+  useEffect(() => {
+    if (props.rpcNode) form.setFieldsValue(props.rpcNode)
+  }, [props.rpcNode])
+
   const onOk = async () => {
     setSaving(true)
 
     const params = form.getFieldsValue()
-
-    console.log(params)
-    console.log(props.chainId)
+    if (props.rpcNode?.id) {
+      params.id = props.rpcNode?.id
+    }
 
     await saveRpcNode({
       ...params,
@@ -39,8 +45,6 @@ export default function RpcNodeForm(props: IRpcNodeFormProps) {
 
     props.onSubmitSucceed()
   }
-
-  const [form] = useForm<ISaveRpcNodeParams>()
 
   return (
     <UniModal
