@@ -2,8 +2,7 @@ import IBaseEntity from './base'
 import { IChain } from './chain'
 
 export interface IRpcNode extends IBaseEntity {
-  name: 'Mainnet' | 'Testnet'
+  name: string
   chain: IChain
-  is_mainnet: boolean
   rpc_url: string
 }

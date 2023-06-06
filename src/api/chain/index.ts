@@ -14,3 +14,13 @@ export const saveChain = (data: ISaveChainParams) => {
     data
   })
 }
+
+export const setDefaultRpcUrl = (chainId: number, url: string) => {
+  return Http.post({
+    url: '/chain/set_rpc',
+    data: {
+      chainId: chainId,
+      url: url
+    }
+  })
+}

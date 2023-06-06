@@ -11,6 +11,11 @@ import ErrorIcon from '../../components/Icon/ErrorIcon'
 import CreateIcon from '../../components/Icon/CreateIcon'
 import useEdit from '../../hooks/useEdit'
 import ChainForm from './Form'
+import UniExpandRow from '../../components/UniExpandRow'
+import RpcList from './RpcList'
+import { useState } from 'react'
+import RpcNodeForm from './RpcNodeForm'
+import { IRpcNode } from '../../types/entities/rpc-node'
 
 export default function Chain() {
   const { token } = theme.useToken()
@@ -141,6 +146,13 @@ export default function Chain() {
         columns={columns}
         pagination={false}
         rowKey={'id'}
+        expandable={{
+          expandedRowRender: (record) => (
+            <UniExpandRow>
+              <RpcList chain={record} />
+            </UniExpandRow>
+          )
+        }}
       />
 
       <ChainForm
