@@ -1,13 +1,14 @@
-import { LoadingOutlined } from '@ant-design/icons'
+import { EllipsisOutlined, LoadingOutlined } from '@ant-design/icons'
 import { IChain } from '../../types/entities/chain'
 import { useEffect, useState } from 'react'
 import { IRpcNode } from '../../types/entities/rpc-node'
 import UniTable from '../../components/UniTable'
-import { Button, Space } from 'antd'
+import { Button, Space, Tooltip } from 'antd'
 import { getRpcNodeList } from '../../api/rpc-node'
 import RpcNodeForm from './RpcNodeForm'
 import { ColumnsType } from 'antd/es/table'
 import { setDefaultRpcUrl } from '../../api/chain'
+import EditIcon from '../../components/Icon/EditIcon'
 
 type RpcListProps = {
   chain: IChain
@@ -17,23 +18,33 @@ export default function RpcList(props: RpcListProps) {
   const { chain } = props
   const [loading, setLoading] = useState(false)
   const [rpcList, setRpcList] = useState<IRpcNode[]>()
+  const [latencyList, setLatencyList] = useState<number[]>()
 
   const columns: ColumnsType<IRpcNode> = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      align: 'center'
-    },
-    {
       title: 'NAME',
       dataIndex: 'name',
-      align: 'center'
+      align: 'center',
+      width: '150px'
     },
-
     {
       title: 'RPC Server Address',
       dataIndex: 'rpc_url',
+      align: 'center',
+      width: '500px',
+      ellipsis: true,
+      render: (url) => {
+        return <Tooltip title={url}>{url}</Tooltip>
+      }
+    },
+    {
+      title: 'Latency',
+      dataIndex: 'latency',
       align: 'center'
+      // render: async (_, record) => {
+      //   const
+      //   return <div>10ms</div>
+      // }
     },
     {
       title: 'OPERATION',
@@ -44,11 +55,9 @@ export default function RpcList(props: RpcListProps) {
           <Space wrap>
             <Button
               size='small'
-              type='primary'
               onClick={() => onUpdate(record)}
-            >
-              edit
-            </Button>
+              icon=<EditIcon />
+            />
             <Button
               size='small'
               type='primary'
@@ -66,6 +75,8 @@ export default function RpcList(props: RpcListProps) {
     setLoading(true)
     const list = await getRpcNodeList(props.chain.id)
 
+    // 获取延迟数据列表
+    // list
     setRpcList(list)
     setLoading(false)
   }
@@ -101,7 +112,6 @@ export default function RpcList(props: RpcListProps) {
       {rpcList && rpcList.length > 0 && (
         <UniTable
           size='small'
-          bordered={false}
           pagination={false}
           dataSource={rpcList}
           columns={columns}
