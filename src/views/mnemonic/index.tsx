@@ -41,7 +41,7 @@ export default function Mnemonic() {
               color: token.colorPrimary
             }}
           >
-            {record.chain?.symbol}
+            {record.chain?.topic}
           </div>
         )
       }

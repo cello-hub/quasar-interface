@@ -7,3 +7,11 @@ export interface IUpdateWalletParams {
   alias: string
   available: boolean
 }
+
+export interface ICreateWalletParams {
+  alias?: string
+  address: string
+  secret?: string
+  chainId: number
+  available: boolean
+}

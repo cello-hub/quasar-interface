@@ -1,9 +1,9 @@
-import { EllipsisOutlined, LoadingOutlined } from '@ant-design/icons'
+import { LoadingOutlined } from '@ant-design/icons'
 import { IChain } from '../../types/entities/chain'
 import { useEffect, useState } from 'react'
 import { IRpcNode } from '../../types/entities/rpc-node'
 import UniTable from '../../components/UniTable'
-import { Button, Space, Tooltip } from 'antd'
+import { App, Button, Space, Tooltip, message } from 'antd'
 import { getRpcNodeList } from '../../api/rpc-node'
 import RpcNodeForm from './RpcNodeForm'
 import { ColumnsType } from 'antd/es/table'
@@ -98,8 +98,10 @@ export default function RpcList(props: RpcListProps) {
     setRpcNode(rpcNode)
   }
 
-  const onSetDefault = (rpcNode: IRpcNode) => {
-    setDefaultRpcUrl(chain.id, rpcNode.rpc_url)
+  const onSetDefault = async (rpcNode: IRpcNode) => {
+    await setDefaultRpcUrl(chain.id, rpcNode.rpc_url)
+
+    message.success('set succeed')
   }
 
   return loading ? (

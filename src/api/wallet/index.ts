@@ -1,6 +1,10 @@
 import Http from '../http'
 import { IWallet } from './../../types/entities/wallet'
-import { IUpdateWalletParams, IWalletListParams } from './types'
+import {
+  ICreateWalletParams,
+  IUpdateWalletParams,
+  IWalletListParams
+} from './types'
 
 export const getWallets = (params?: IWalletListParams): Promise<IWallet[]> => {
   return Http.get({
@@ -25,6 +29,13 @@ export const createWallet = () => {
 export const getSecret = (id: number): Promise<string> => {
   return Http.get({
     url: `/wallet/secret/${id}`
+  })
+}
+
+export const createWalletManual = (data: ICreateWalletParams) => {
+  return Http.post({
+    url: '/wallet/manual',
+    data
   })
 }
 

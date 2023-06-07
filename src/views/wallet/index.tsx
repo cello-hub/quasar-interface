@@ -10,6 +10,7 @@ import { MdEdit } from 'react-icons/md'
 import WalletForm from './Form'
 import UniModal from '../../components/UniModal'
 import { IoMdBrowsers } from 'react-icons/io'
+import WalletCreateForm from './CreateForm'
 export default function Wallet() {
   const [walletList, setWalletList] = useState<IWallet[]>([])
 
@@ -36,11 +37,24 @@ export default function Wallet() {
       width: 150
     },
     {
+      title: 'BALANCE',
+      dataIndex: 'amount',
+      align: 'center'
+    },
+    {
       title: 'MNEMONIC',
       dataIndex: 'mnemonic',
       align: 'center',
       render: (mnemonic) => {
         return <div>{mnemonic ? mnemonic.id : '-'}</div>
+      }
+    },
+    {
+      title: 'CHAIN',
+      dataIndex: 'chain',
+      align: 'center',
+      render: (chain) => {
+        return <div>{chain ? chain.topic : '-'}</div>
       }
     },
     {
@@ -134,6 +148,12 @@ export default function Wallet() {
     getList()
   }
 
+  const [isOpenCreateForm, setIsOpenCreateForm] = useState(false)
+  const onCreateManual = async () => {
+    setIsOpenCreateForm(true)
+    // await
+  }
+
   const [isOpenSecertModel, setIsOpenSecertModel] = useState(false)
   const [secret, setSecret] = useState('')
   const onOpenSecretModel = async (wallet: IWallet) => {
@@ -151,10 +171,17 @@ export default function Wallet() {
           icon={<PlusOutlined />}
           type='primary'
           style={{ marginBottom: '10px' }}
-        >
-          Create EVM Wallet
-        </Button>
+        />
       </Popconfirm>
+
+      <Button
+        icon={<PlusOutlined />}
+        type='primary'
+        style={{ marginBottom: '10px', marginLeft: '10px' }}
+        onClick={onCreateManual}
+      >
+        manual
+      </Button>
 
       <UniTable dataSource={walletList} columns={columns} rowKey={'id'} />
 
@@ -166,6 +193,15 @@ export default function Wallet() {
           getList()
         }}
         wallet={editableWallet!}
+      />
+
+      <WalletCreateForm
+        open={isOpenCreateForm}
+        onCloseFormModal={() => setIsOpenCreateForm(false)}
+        onSubmitSucceed={() => {
+          setIsOpenCreateForm(false)
+          getList()
+        }}
       />
 
       <UniModal
