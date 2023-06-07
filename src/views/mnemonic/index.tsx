@@ -47,6 +47,10 @@ export default function Mnemonic() {
       }
     },
     {
+      title: 'REMARK',
+      dataIndex: 'remark'
+    },
+    {
       title: 'OPERATION',
       dataIndex: 'operation',
       align: 'center',

@@ -50,12 +50,16 @@ export default function MnemonicForm(props: IWalletForm) {
         labelAlign='right'
         {...layout}
       >
-        <Form.Item label='PHRASE' name='phrase'>
+        <Form.Item label='Phrase' name='phrase'>
           <TextArea rows={4} />
         </Form.Item>
 
         <Form.Item label='Chain' name='chain_id' valuePropName='chain.topic'>
           <Select options={chainOptions} />
+        </Form.Item>
+
+        <Form.Item label='Remark' name='remark'>
+          <Input />
         </Form.Item>
       </UniModalForm>
     </UniModal>

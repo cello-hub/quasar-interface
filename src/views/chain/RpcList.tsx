@@ -56,7 +56,7 @@ export default function RpcList(props: RpcListProps) {
             <Button
               size='small'
               onClick={() => onUpdate(record)}
-              icon=<EditIcon />
+              icon={<EditIcon />}
             />
             <Button
               size='small'
