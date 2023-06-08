@@ -21,6 +21,7 @@ import Token from './views/token'
 import Login from './views/login'
 import Mnemonic from './views/mnemonic'
 import Chain from './views/chain'
+import { ToolFilled } from '@ant-design/icons'
 
 export interface RouteProps {
   name?: string
@@ -88,6 +89,12 @@ export const routes: RouteProps[] = [
         name: 'Couponer',
         path: 'couponer',
         icon: <FaTasks />,
+        element: <Couponer />
+      },
+      {
+        name: 'Toos',
+        path: 'tools',
+        icon: <ToolFilled />,
         element: <Couponer />
       }
     ]
