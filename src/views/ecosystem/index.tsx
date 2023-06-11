@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom'
 import { FaDiscord, FaTwitter } from 'react-icons/fa'
 import EditIcon from '../../components/Icon/EditIcon'
 import CreateIcon from '../../components/Icon/CreateIcon'
+import UniExpandRow from '../../components/UniExpandRow'
+import ExpandRow from './ExpandRow'
 
 export default function Ecosystem() {
   const { token } = theme.useToken()
@@ -79,14 +81,6 @@ export default function Ecosystem() {
       }
     },
     {
-      title: 'DESC',
-      dataIndex: 'desc'
-    },
-    {
-      title: 'REMARK',
-      dataIndex: 'remark'
-    },
-    {
       title: 'CREATE_DATE',
       dataIndex: 'created_at'
     },
@@ -128,7 +122,18 @@ export default function Ecosystem() {
           setEditableEcosystem(undefined)
         }}
       />
-      <UniTable columns={columns} dataSource={ecosystemList} rowKey={'id'} />
+      <UniTable
+        columns={columns}
+        dataSource={ecosystemList}
+        rowKey={'id'}
+        expandable={{
+          expandedRowRender: (record) => (
+            <UniExpandRow>
+              <ExpandRow {...record} />
+            </UniExpandRow>
+          )
+        }}
+      />
 
       <EcosystemForm
         open={isOpenForm}
