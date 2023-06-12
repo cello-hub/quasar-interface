@@ -92,7 +92,7 @@ export default function AppLayout() {
             borderRadius: '8px'
           }}
         >
-          <img src={BrandLogo} width='100%' />
+          {/* <img src={BrandLogo} width='100%' /> */}
         </div>
         <Menu
           defaultSelectedKeys={['dashboard']}

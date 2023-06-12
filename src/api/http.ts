@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 import { get } from 'lodash-es'
 
@@ -159,6 +160,11 @@ class Http {
         // } else {
         //   params.errorMessage && Toast(params.errorMessage)
         // }
+        if (params.showErrorMessage !== false) {
+          console.log(error)
+
+          message.error((error && error.message) || 'An error occurred')
+        }
         return Promise.reject(error)
       })
   }

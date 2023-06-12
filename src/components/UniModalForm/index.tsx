@@ -5,6 +5,11 @@ interface IUniModalFormProps extends FormProps {
   children: React.ReactNode
 }
 
+const layout = {
+  labelCol: { span: 6 },
+  wrapperCol: { span: 18 }
+}
+
 export default function UniModalForm(props: IUniModalFormProps) {
   return (
     <Form
@@ -13,6 +18,7 @@ export default function UniModalForm(props: IUniModalFormProps) {
       labelAlign='right'
       labelWrap
       colon={false}
+      {...layout}
       {...props}
     >
       {props.children}
