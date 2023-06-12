@@ -12,7 +12,7 @@ export default function ClusterExpandRow(props: ICluster) {
               display: 'flex'
             }}
           >
-            <span>{key} :</span>
+            <span>{key + ': '}</span>
             <span>{props[key as IClusterKeys]}</span>
           </div>
         )

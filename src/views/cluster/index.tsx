@@ -6,6 +6,7 @@ import { getClusterList } from '../../api/cluster'
 import ClusterExpandRow from './ExpandRow'
 import ClusterForm from './Form'
 import EditIcon from '../../components/Icon/EditIcon'
+import CreateIcon from '../../components/Icon/CreateIcon'
 
 export default function Cluster() {
   const [clusterList, setClusterList] = useState<ICluster[]>([])
@@ -23,6 +24,8 @@ export default function Cluster() {
 
   useEffect(() => {
     const collapseItems: CollapseProps['items'] = clusterList.map((cluster) => {
+      console.log(cluster)
+
       return {
         key: cluster.id,
         label: cluster.name,
@@ -57,7 +60,12 @@ export default function Cluster() {
 
   return (
     <div>
-      <Button onClick={onCreate}>+</Button>
+      <Button
+        icon={<CreateIcon />}
+        type='primary'
+        style={{ marginBottom: '10px' }}
+        onClick={onCreate}
+      />
       <Collapse items={collapseItems} />
 
       <ClusterForm

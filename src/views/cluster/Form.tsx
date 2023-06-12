@@ -29,7 +29,7 @@ export default function ClusterForm(props: IClusterProps) {
   useEffect(() => {
     console.log('form changedpppp-====')
 
-    console.log(form.getFieldsValue())
+    // console.log(form.getFieldsValue())
   }, [form])
 
   const onOk = async () => {
@@ -40,6 +40,7 @@ export default function ClusterForm(props: IClusterProps) {
     }
     try {
       await saveCluster(params!)
+      setSaving(false)
       props.onSubmitSucceed()
     } catch (error) {
       setSaving(false)
@@ -63,6 +64,10 @@ export default function ClusterForm(props: IClusterProps) {
         </Form.Item>
 
         <Form.Item label='Twitter' name='twitter'>
+          <Input />
+        </Form.Item>
+
+        <Form.Item label='Discord' name='discord'>
           <Input />
         </Form.Item>
 
