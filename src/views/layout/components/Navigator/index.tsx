@@ -19,6 +19,7 @@ export default function Navigator(props: { title?: string }) {
               label: 'Recommended',
               colors: [
                 '#000000',
+                '#FFFFFF',
                 '#00B96B',
                 '#FA8C16',
                 '#FADB14',

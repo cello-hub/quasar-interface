@@ -14,11 +14,6 @@ interface IWalletForm {
   onSubmitSucceed: () => void
 }
 
-const layout = {
-  labelCol: { span: 5 },
-  wrapperCol: { span: 19 }
-}
-
 export default function WalletCreateForm(props: IWalletForm) {
   const [saving, setSaving] = useState(false)
   const [form] = useForm<ICreateWalletParams>()
@@ -50,12 +45,7 @@ export default function WalletCreateForm(props: IWalletForm) {
       onCancel={props.onCloseFormModal}
       onOk={onOk}
     >
-      <UniModalForm
-        form={form}
-        autoComplete='off'
-        labelAlign='right'
-        {...layout}
-      >
+      <UniModalForm form={form} autoComplete='off' labelAlign='right'>
         <Form.Item label='ALIAS' name='alias'>
           <Input />
         </Form.Item>

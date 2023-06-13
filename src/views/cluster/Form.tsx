@@ -21,16 +21,8 @@ export default function ClusterForm(props: IClusterProps) {
   const [form] = useForm<ISaveClusterParams | undefined>()
 
   useEffect(() => {
-    console.log(cluster)
-
-    form.setFieldsValue(cluster)
+    form.resetFields()
   }, [cluster])
-
-  useEffect(() => {
-    console.log('form changedpppp-====')
-
-    // console.log(form.getFieldsValue())
-  }, [form])
 
   const onOk = async () => {
     setSaving(true)

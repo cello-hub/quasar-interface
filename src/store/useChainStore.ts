@@ -4,7 +4,7 @@ import { getChainList } from '../api/chain'
 
 interface IChainState {
   chainList: IChain[]
-  chainOptions: { label: string; value: string }[]
+  chainOptions: { label: string; value: number }[]
   updateChainList: () => void
 }
 
@@ -18,7 +18,7 @@ const useChainStore = create<IChainState>()((set) => ({
       chainOptions: chainList.map((chain) => {
         return {
           label: chain.topic,
-          value: String(chain.id)
+          value: chain.id
         }
       })
     })

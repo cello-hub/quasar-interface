@@ -131,7 +131,10 @@ export default function Ecosystem() {
             <UniExpandRow>
               <ExpandRow {...record} />
             </UniExpandRow>
-          )
+          ),
+          rowExpandable: (record) => {
+            return record.desc || record.remark
+          }
         }}
       />
 

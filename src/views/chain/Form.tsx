@@ -14,11 +14,6 @@ interface IChainForm {
   onSubmitSucceed: () => void
 }
 
-const layout = {
-  labelCol: { span: 5 },
-  wrapperCol: { span: 19 }
-}
-
 export default function ChainForm(props: IChainForm) {
   const { chain } = props
   const [saving, setSaving] = useState(false)
@@ -63,7 +58,6 @@ export default function ChainForm(props: IChainForm) {
         autoComplete='off'
         labelAlign='right'
         initialValues={chain}
-        {...layout}
       >
         <Form.Item label='Topic' name='topic'>
           <Input />

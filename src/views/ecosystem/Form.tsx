@@ -15,32 +15,15 @@ interface IEcosystemProps {
   onSubmitSucceed: () => void
 }
 
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 }
-}
-
 export default function EcosystemForm(props: IEcosystemProps) {
   const { ecosystem } = props
   const [saving, setSaving] = useState(false)
   const [form] = useForm<IEcosystem>()
-  const chainList = useChainStore((state) => state.chainList)
-  const [chainOptions, setChainOptions] = useState<
-    { label: string; value: string }[]
-  >([])
+  const chainOptions = useChainStore((state) => state.chainOptions)
 
   useEffect(() => {
-    if (chainList && chainList.length > 0) {
-      setChainOptions(
-        chainList.map((chain) => {
-          return {
-            label: chain.topic,
-            value: String(chain.id)
-          }
-        })
-      )
-    }
-  }, [chainList])
+    form.resetFields()
+  }, [ecosystem])
 
   const onOk = async () => {
     setSaving(true)
@@ -71,39 +54,46 @@ export default function EcosystemForm(props: IEcosystemProps) {
       onCancel={props.onCloseFormModal}
       onOk={onOk}
     >
-      <UniModalForm form={form} initialValues={ecosystem} {...layout}>
-        <Form.Item label='NAME' name='name' rules={[{ required: true }]}>
+      <UniModalForm
+        form={form}
+        initialValues={{
+          finished: true,
+          chain_id: ecosystem?.chain.id,
+          ...ecosystem
+        }}
+      >
+        <Form.Item label='Name' name='name' rules={[{ required: true }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item label='LINK' name='link'>
+        <Form.Item label='Link' name='link'>
           <Input />
         </Form.Item>
 
-        <Form.Item label='DISCORD' name='discord'>
+        <Form.Item label='Discord' name='discord'>
           <Input />
         </Form.Item>
 
-        <Form.Item label='TWITTER' name='twitter'>
+        <Form.Item label='Twitter' name='twitter'>
           <Input />
         </Form.Item>
 
-        <Form.Item label='CHAIN' name='chain_id' valuePropName='chain.topic'>
+        <Form.Item label='Chain' name='chain_id'>
           <Select options={chainOptions} />
         </Form.Item>
 
-        <Form.Item label='FINISHED' name='finished'>
+        <Form.Item label='Finished' name='finished'>
           <Radio.Group>
             <Radio value={true}>YES</Radio>
             <Radio value={false}>NO</Radio>
           </Radio.Group>
         </Form.Item>
 
-        <Form.Item label='DESCRIPTION' name='desc'>
+        <Form.Item label='Description' name='desc'>
           <TextArea rows={4} />
         </Form.Item>
 
-        <Form.Item label='REMARK' name='remark'>
+        <Form.Item label='Remark' name='remark'>
           <TextArea rows={4} />
         </Form.Item>
       </UniModalForm>

@@ -2,7 +2,7 @@ import { Form, Input, Radio } from 'antd'
 import { IWallet } from '../../types/entities/wallet'
 import UniModal from '../../components/UniModal'
 import UniModalForm from '../../components/UniModalForm'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { updateWallet } from '../../api/wallet'
 import { useForm } from 'antd/es/form/Form'
 
@@ -13,15 +13,14 @@ interface IWalletForm {
   onSubmitSucceed: () => void
 }
 
-const layout = {
-  labelCol: { span: 5 },
-  wrapperCol: { span: 19 }
-}
-
 export default function WalletForm(props: IWalletForm) {
   const { wallet } = props
   const [saving, setSaving] = useState(false)
   const [form] = useForm<IWallet>()
+
+  useEffect(() => {
+    form.resetFields()
+  }, [wallet])
 
   const onOk = async () => {
     setSaving(true)
@@ -49,7 +48,6 @@ export default function WalletForm(props: IWalletForm) {
         autoComplete='off'
         labelAlign='right'
         initialValues={wallet}
-        {...layout}
       >
         <Form.Item label='ADDRESS'>{wallet?.address}</Form.Item>
         <Form.Item label='ALIAS' name='alias'>

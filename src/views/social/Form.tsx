@@ -2,7 +2,7 @@ import { Form, Input, Radio, Select } from 'antd'
 import { ISocial } from '../../types/entities/social'
 import UniModal from '../../components/UniModal'
 import UniModalForm from '../../components/UniModalForm'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'antd/es/form/Form'
 import TextArea from 'antd/es/input/TextArea'
 import {
@@ -18,15 +18,14 @@ interface IWalletForm {
   onSubmitSucceed: () => void
 }
 
-const layout = {
-  labelCol: { span: 5 },
-  wrapperCol: { span: 19 }
-}
-
 export default function SocialForm(props: IWalletForm) {
   const { social } = props
   const [saving, setSaving] = useState(false)
   const [form] = useForm<ISocial>()
+
+  useEffect(() => {
+    form.resetFields()
+  }, [social])
 
   const onOk = async () => {
     setSaving(true)
@@ -60,7 +59,6 @@ export default function SocialForm(props: IWalletForm) {
           platform: social?.platform ?? SocialPlatfrom[0],
           available: social?.available ?? true
         }}
-        {...layout}
       >
         <Form.Item label='ACCOUNT' name='account' rules={[{ required: true }]}>
           <Input />

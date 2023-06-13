@@ -1,7 +1,7 @@
 import { Form, Input, InputNumber, Select } from 'antd'
 import UniModal from '../../components/UniModal'
 import UniModalForm from '../../components/UniModalForm'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'antd/es/form/Form'
 import { IToken } from '../../types/entities/token'
 import { TokenType, TokenTypeOptions } from '../../constants/token-type'
@@ -15,21 +15,19 @@ interface ITokenForm {
   onSubmitSucceed: () => void
 }
 
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 }
-}
-
 export default function TokenForm(props: ITokenForm) {
   const { token } = props
   const [saving, setSaving] = useState(false)
   const [form] = useForm<IToken & { chain_id: number }>()
   const chainOptions = useChainStore((state) => state.chainOptions)
 
+  useEffect(() => {
+    form.resetFields()
+  }, [token])
+
   const onOk = async () => {
     setSaving(true)
     const values = form.getFieldsValue()
-
     if (token?.id) {
       await updateToken(token.id, values)
     } else {
@@ -53,9 +51,9 @@ export default function TokenForm(props: ITokenForm) {
         labelAlign='right'
         initialValues={{
           ...token,
+          chain_id: token?.chain.topic,
           type: token?.type ?? TokenType[0]
         }}
-        {...layout}
       >
         <Form.Item label='Name' name='name'>
           <Input />
@@ -65,7 +63,7 @@ export default function TokenForm(props: ITokenForm) {
           <Input />
         </Form.Item>
 
-        <Form.Item label='Chain' name='chain_id' valuePropName='chain.topic'>
+        <Form.Item label='Chain' name='chain_id'>
           <Select options={chainOptions} />
         </Form.Item>
 

@@ -14,10 +14,6 @@ interface IRpcNodeFormProps {
   onCloseFormModal: () => void
   onSubmitSucceed: () => void
 }
-const layout = {
-  labelCol: { span: 5 },
-  wrapperCol: { span: 19 }
-}
 
 export default function RpcNodeForm(props: IRpcNodeFormProps) {
   const [saving, setSaving] = useState(false)
@@ -63,7 +59,6 @@ export default function RpcNodeForm(props: IRpcNodeFormProps) {
           name: props.rpcNode?.name,
           url: props.rpcNode?.rpc_url
         }}
-        {...layout}
       >
         <Form.Item label='Name' name='name'>
           <Input />

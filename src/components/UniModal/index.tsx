@@ -7,6 +7,7 @@ export default function UniModal(props: ModalProps) {
       closeIcon={<CloseIcon />}
       maskClosable={false}
       destroyOnClose
+      forceRender
       maskStyle={{
         backdropFilter: 'blur(5px) hue-rotate(90deg)'
       }}
