@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'ProtoMono';
   src: url('../font/ProtoMono-Regular.otf') format(truetype);

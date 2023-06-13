@@ -6,16 +6,19 @@ export default function ClusterExpandRow(props: ICluster) {
   return (
     <div>
       {Object.keys(props).map((key) => {
-        return (
-          <div
-            style={{
-              display: 'flex'
-            }}
-          >
-            <span>{key + ': '}</span>
-            <span>{props[key as IClusterKeys]}</span>
-          </div>
-        )
+        if (
+          props[key as IClusterKeys] &&
+          key !== 'created_at' &&
+          key !== 'updated_at'
+        ) {
+          return (
+            <div className='flex'>
+              <span>{`${key}:`}&nbsp;</span>
+              <span>{props[key as IClusterKeys]}</span>
+            </div>
+          )
+        }
+        return null
       })}
     </div>
   )
