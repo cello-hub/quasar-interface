@@ -153,16 +153,7 @@ class Http {
       })
       .catch((error) => {
         if (params.ignoreStatusCode) return Promise.resolve(error)
-        // if (params.showErrorMessage) {
-        //   params.errorMessage
-        //     ? Toast(params.errorMessage)
-        //     : Toast((error && error.message) || '请求出错！')
-        // } else {
-        //   params.errorMessage && Toast(params.errorMessage)
-        // }
         if (params.showErrorMessage !== false) {
-          console.log(error)
-
           message.error((error && error.message) || 'An error occurred')
         }
         return Promise.reject(error)

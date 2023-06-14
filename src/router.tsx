@@ -92,7 +92,7 @@ export const routes: RouteProps[] = [
         element: <Couponer />
       },
       {
-        name: 'Toos',
+        name: 'Tools',
         path: 'tools',
         icon: <ToolFilled />,
         element: <Couponer />

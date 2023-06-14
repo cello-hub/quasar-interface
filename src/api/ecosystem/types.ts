@@ -1,6 +1,8 @@
 import { IPaginationParams } from '../../types/pagination'
 
-export interface IEcosystemListParams extends IPaginationParams {}
+export interface IEcosystemListParams extends IPaginationParams {
+  name: string
+}
 
 export interface ICreateEcosystemParams {
   name: string
