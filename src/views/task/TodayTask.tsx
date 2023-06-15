@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
-import { getTaskList } from '../../api/task'
+import { getTodayTaskList } from '../../api/task'
 import { ITask } from '../../types/entities/task'
-import { Button, Card, Checkbox, List, Typography } from 'antd'
-import TaskForm from './TaskForm'
-import CreateIcon from '../../components/Icon/CreateIcon'
+import { List } from 'antd'
+import TaskItem from './TaskItem'
+import dayjs from 'dayjs/esm'
 
 export default function TodayTask() {
   const [taskList, setTaskList] = useState<ITask[]>([])
   const getList = async () => {
-    const taskList = await getTaskList()
+    const taskList = await getTodayTaskList()
     setTaskList(taskList)
   }
 
@@ -16,33 +16,13 @@ export default function TodayTask() {
     getList()
   }, [])
 
-  const [isOpenTodoForm, setIsOpenTodoForm] = useState(false)
-  const onCreateTodo = () => {
-    setIsOpenTodoForm(true)
-  }
-
-  const onCheckChange = (task: ITask, index: number) => {
-    // task.finished = !task.finished
-    // let newTaskList = [...taskList]
-    // newTaskList.splice(index, 1, task)
-    // setTaskList(newTaskList)
-
-    // task 绑定了生态
-    if (task.ecosystem) {
-    } else {
-    }
+  const onCheckChanged = (task: ITask) => {
+    getList()
   }
 
   return (
     <div>
-      <Button
-        className='ml-[16px]'
-        onClick={onCreateTodo}
-        icon={<CreateIcon />}
-        type='primary'
-        size='small'
-      ></Button>
-
+      <div className='font-[700]'>{dayjs().format('YYYY-MM-DD')}</div>
       <List
         dataSource={taskList}
         size='small'
@@ -50,29 +30,9 @@ export default function TodayTask() {
         renderItem={(item, index) => {
           return (
             <List.Item>
-              <Checkbox
-                checked={item.finished}
-                onChange={() => onCheckChange(item, index)}
-              >
-                <span
-                  className={`${item.finished && 'line-through opacity-50'}`}
-                >
-                  {item.name}
-                </span>
-              </Checkbox>
+              <TaskItem task={item} onCheckChanged={onCheckChanged} />
             </List.Item>
           )
-        }}
-      />
-
-      <TaskForm
-        open={isOpenTodoForm}
-        onCloseFormModal={() => {
-          setIsOpenTodoForm(false)
-        }}
-        onSubmitSucceed={() => {
-          setIsOpenTodoForm(false)
-          getList()
         }}
       />
     </div>

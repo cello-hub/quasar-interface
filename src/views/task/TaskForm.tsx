@@ -29,6 +29,7 @@ export default function TaskForm(props: IClusterProps) {
 
   const onOk = async () => {
     const params = form.getFieldsValue()
+    console.log(params.date?.toString())
 
     if (task) {
       params.id = task.id
