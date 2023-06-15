@@ -6,6 +6,7 @@ import FinishedTask from './FinishedTask'
 import CreateIcon from '../../components/Icon/CreateIcon'
 import { useState } from 'react'
 import TaskForm from './TaskForm'
+import dayjs from '../../utils/dayjs'
 
 export default function Task() {
   const tabItems = [
@@ -36,7 +37,13 @@ export default function Task() {
   }
   return (
     <div>
-      <Card title='Task' size='small'>
+      <Card
+        title={`Task ${dayjs().format('YYYY-MM-DD')}`}
+        size='small'
+        headStyle={{
+          color: '#01B6FD'
+        }}
+      >
         <Tabs
           items={tabItems}
           centered

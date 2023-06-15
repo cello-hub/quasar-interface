@@ -1,4 +1,4 @@
-import { Button, Checkbox, Drawer, theme } from 'antd'
+import { Button, Checkbox, Drawer, Modal, theme } from 'antd'
 import { ITask } from '../../types/entities/task'
 import { useState } from 'react'
 import { CloseIcon } from '../../components/Icon/CloseIcon'
@@ -18,15 +18,26 @@ export default function TaskItem(props: ITaskItemProps) {
 
   const [openDrawer, setOpenDrawer] = useState(false)
 
-  const onCheck = async () => {
-    // task 绑定了生态
+  const onReverseFinished = async () => {
     if (task.ecosystem) {
       await reverseFinished(task.id)
     } else {
       await reverseFinished(task.id)
     }
-
     props.onCheckChanged && props.onCheckChanged(task)
+  }
+
+  const onCheck = async () => {
+    if (!task.finished) {
+      Modal.confirm({
+        title: 'Are you sure to complete?',
+        onOk: async () => {
+          onReverseFinished()
+        }
+      })
+    } else {
+      onReverseFinished()
+    }
   }
 
   const onEdit = async () => {}

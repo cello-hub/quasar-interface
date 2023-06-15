@@ -22,7 +22,6 @@ export default function TodayTask() {
 
   return (
     <div>
-      <div className='font-[700]'>{dayjs().format('YYYY-MM-DD')}</div>
       <List
         dataSource={taskList}
         size='small'
