@@ -7,6 +7,7 @@ import CreateIcon from '../../components/Icon/CreateIcon'
 import { useState } from 'react'
 import TaskForm from './TaskForm'
 import dayjs from '../../utils/dayjs'
+import ExpiredTask from './ExpiredTask'
 
 export default function Task() {
   const tabItems = [
@@ -24,6 +25,11 @@ export default function Task() {
       key: 'TBD',
       label: 'TBD',
       children: <TBDTask />
+    },
+    {
+      key: 'Expired',
+      label: 'Expired',
+      children: <ExpiredTask />
     },
     {
       key: 'Finished',
