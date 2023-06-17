@@ -1,6 +1,10 @@
 import { ITask } from '../../types/entities/task'
 import Http from '../http'
-import { ISaveTaskParams, ITaskListParams } from './types'
+import {
+  ISaveTaskParams,
+  ITaskListParams,
+  ITaskParticipateParams
+} from './types'
 
 export const getTaskList = (data?: ITaskListParams): Promise<ITask[]> => {
   return Http.post({
@@ -39,8 +43,9 @@ export const saveTask = (data: ISaveTaskParams) => {
   })
 }
 
-export const reverseFinished = (id: number) => {
-  return Http.get({
-    url: `/task/${id}/reverse-finished`
+export const executeParticipate = (data: ITaskParticipateParams) => {
+  return Http.post({
+    url: '/task/participate',
+    data
   })
 }

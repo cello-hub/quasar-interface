@@ -2,7 +2,7 @@ import { Button, Checkbox, Drawer, Modal, theme } from 'antd'
 import { ITask } from '../../types/entities/task'
 import { useState } from 'react'
 import { CloseIcon } from '../../components/Icon/CloseIcon'
-import { reverseFinished, saveTask } from '../../api/task'
+import { saveTask } from '../../api/task'
 import dayjs from '../../utils/dayjs'
 import EditIcon from '../../components/Icon/EditIcon'
 import ParticipateForm from '../../components/ParticipateForm'
@@ -116,6 +116,7 @@ export default function TaskItem(props: ITaskItemProps) {
       />
 
       <ParticipateForm
+        task={task}
         open={openParticipateForm}
         onCloseFormModal={() => setOpenParticipateForm(false)}
         onSubmitSucceed={() => {

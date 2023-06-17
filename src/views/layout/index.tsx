@@ -6,6 +6,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import Navigator from './components/Navigator'
 import BrandLogo from '../../assets/imgs/ikun.png'
 import useChainStore from '../../store/useChainStore'
+import useClusterStore from '../../store/useClusterStore'
 
 const { Content, Sider, Header } = Layout
 
@@ -67,8 +68,11 @@ export default function AppLayout() {
   }, [pathname, menuItems])
 
   const updateChainList = useChainStore((state) => state.updateChainList)
+  const updatClusterList = useClusterStore((state) => state.updatClusterList)
+
   useEffect(() => {
     updateChainList()
+    updatClusterList()
   }, [])
 
   return (

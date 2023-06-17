@@ -7,3 +7,8 @@ export interface ITaskListParams extends IPaginationParams {
   date?: string
   finished?: boolean
 }
+
+export interface ITaskParticipateParams {
+  taskId: number
+  clusterIds: number[]
+}

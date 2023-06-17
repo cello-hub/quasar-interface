@@ -1,7 +1,8 @@
+import { ICluster } from '../../types/entities/cluster'
 import Http from '../http'
 import { ISaveClusterParams } from './types'
 
-export const getClusterList = () => {
+export const getClusterList = (): Promise<ICluster[]> => {
   return Http.get({
     url: '/cluster'
   })
