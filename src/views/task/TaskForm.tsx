@@ -59,7 +59,7 @@ export default function TaskForm(props: IClusterProps) {
         initialValues={{
           ...task,
           finished: false,
-          date: dayjs(),
+          date: dayjs(task?.date),
           ecosystemId: task?.ecosystem?.id
         }}
       >
