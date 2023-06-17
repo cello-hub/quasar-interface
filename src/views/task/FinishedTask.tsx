@@ -17,7 +17,7 @@ export default function FinishedTask() {
     getList()
   }, [])
 
-  const onCheckChanged = (task: ITask) => {
+  const onUpdated = (task: ITask) => {
     getList()
   }
   return (
@@ -31,7 +31,7 @@ export default function FinishedTask() {
       renderItem={(item, index) => {
         return (
           <List.Item>
-            <TaskItem task={item} showDate onCheckChanged={onCheckChanged} />
+            <TaskItem task={item} showDate onUpdated={onUpdated} />
           </List.Item>
         )
       }}

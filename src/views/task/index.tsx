@@ -22,14 +22,14 @@ export default function Task() {
       children: <FutureTask />
     },
     {
-      key: 'TBD',
-      label: 'TBD',
-      children: <TBDTask />
-    },
-    {
       key: 'Expired',
       label: 'Expired',
       children: <ExpiredTask />
+    },
+    {
+      key: 'TBD',
+      label: 'TBD',
+      children: <TBDTask />
     },
     {
       key: 'Finished',

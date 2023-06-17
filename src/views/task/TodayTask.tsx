@@ -16,7 +16,7 @@ export default function TodayTask() {
     getList()
   }, [])
 
-  const onCheckChanged = (task: ITask) => {
+  const onUpdated = (task: ITask) => {
     getList()
   }
 
@@ -29,7 +29,7 @@ export default function TodayTask() {
         renderItem={(item, index) => {
           return (
             <List.Item>
-              <TaskItem task={item} onCheckChanged={onCheckChanged} />
+              <TaskItem task={item} onUpdated={onUpdated} />
             </List.Item>
           )
         }}

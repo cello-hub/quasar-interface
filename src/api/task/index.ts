@@ -16,6 +16,15 @@ export const getTodayTaskList = (data?: ITaskListParams): Promise<ITask[]> => {
   })
 }
 
+export const getExpiredTaskList = (
+  data?: ITaskListParams
+): Promise<ITask[]> => {
+  return Http.post({
+    url: '/task/expired',
+    data
+  })
+}
+
 export const getFutureTaskList = (data?: ITaskListParams): Promise<ITask[]> => {
   return Http.post({
     url: '/task/future',

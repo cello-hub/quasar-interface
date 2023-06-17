@@ -3,8 +3,8 @@ import { IEcosystem } from './ecosystem'
 
 export interface ITask extends IBaseEntity {
   name: string
-  date: string
-  ecosystem: IEcosystem
+  date?: string
+  ecosystem?: IEcosystem
   finished: boolean
-  remark: string
+  remark?: string
 }

@@ -18,7 +18,7 @@ export default function TBDTask() {
     getList()
   }, [])
 
-  const onCheckChanged = (task: ITask) => {
+  const onUpdated = (task: ITask) => {
     getList()
   }
   return (
@@ -29,7 +29,7 @@ export default function TBDTask() {
       renderItem={(item, index) => {
         return (
           <List.Item>
-            <TaskItem task={item} onCheckChanged={onCheckChanged} />
+            <TaskItem task={item} onUpdated={onUpdated} />
           </List.Item>
         )
       }}

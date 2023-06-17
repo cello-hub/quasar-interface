@@ -1,4 +1,4 @@
-import { DatePicker, Form, Input, Radio, Select } from 'antd'
+import { DatePicker, Form, Input, Radio } from 'antd'
 import UniModalForm from '../../components/UniModalForm'
 import UniModal from '../../components/UniModal'
 import { useEffect, useState } from 'react'
@@ -20,8 +20,6 @@ export default function TaskForm(props: IClusterProps) {
   const { task } = props
   const [saving, setSaving] = useState(false)
   const [form] = useForm<ISaveTaskParams>()
-
-  const [data, setData] = useState<IEcosystem[]>([])
 
   useEffect(() => {
     form.resetFields()
@@ -59,6 +57,7 @@ export default function TaskForm(props: IClusterProps) {
         form={form}
         initialValues={{
           finished: false,
+          ecosystemId: task?.ecosystem?.id,
           ...task
         }}
       >
@@ -66,16 +65,18 @@ export default function TaskForm(props: IClusterProps) {
           <Input />
         </Form.Item>
 
-        <Form.Item label='Date' name='date'>
+        {/* <Form.Item label='Date' name='date'>
           <DatePicker className='w-[100%]' placeholder='' />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item label='Ecosystem' name='ecosystemId'>
-          <EcosystemSelect />
+          <EcosystemSelect
+            ecosystemList={task?.ecosystem ? [task.ecosystem] : []}
+          />
         </Form.Item>
 
         <Form.Item label='Finished' name='finished'>
-          <Radio.Group>
+          <Radio.Group disabled>
             <Radio value={true}>YES</Radio>
             <Radio value={false}>NO</Radio>
           </Radio.Group>

@@ -2,14 +2,16 @@ import { Button, Checkbox, Drawer, Modal, theme } from 'antd'
 import { ITask } from '../../types/entities/task'
 import { useState } from 'react'
 import { CloseIcon } from '../../components/Icon/CloseIcon'
-import { reverseFinished } from '../../api/task'
+import { reverseFinished, saveTask } from '../../api/task'
 import dayjs from '../../utils/dayjs'
 import EditIcon from '../../components/Icon/EditIcon'
+import ParticipateForm from '../../components/ParticipateForm'
+import TaskForm from './TaskForm'
 
 interface ITaskItemProps {
   task: ITask
   showDate?: boolean
-  onCheckChanged?: (task: ITask) => void
+  onUpdated?: (task: ITask) => void
 }
 
 export default function TaskItem(props: ITaskItemProps) {
@@ -17,18 +19,22 @@ export default function TaskItem(props: ITaskItemProps) {
   const { token } = theme.useToken()
 
   const [openDrawer, setOpenDrawer] = useState(false)
+  const [openParticipateForm, setOpenParticipateForm] = useState(false)
 
   const onReverseFinished = async () => {
     if (task.ecosystem) {
-      await reverseFinished(task.id)
+      setOpenParticipateForm(true)
     } else {
-      await reverseFinished(task.id)
+      await saveTask({
+        id: task.id,
+        finished: !task.finished
+      })
     }
-    props.onCheckChanged && props.onCheckChanged(task)
+    props.onUpdated && props.onUpdated(task)
   }
 
   const onCheck = async () => {
-    if (!task.finished) {
+    if (!task.finished && !task.ecosystem) {
       Modal.confirm({
         title: 'Are you sure to complete?',
         onOk: async () => {
@@ -39,8 +45,10 @@ export default function TaskItem(props: ITaskItemProps) {
       onReverseFinished()
     }
   }
-
-  const onEdit = async () => {}
+  const [openTaskForm, setOpenTaskForm] = useState(false)
+  const onEdit = async () => {
+    setOpenTaskForm(true)
+  }
 
   return (
     <>
@@ -96,6 +104,25 @@ export default function TaskItem(props: ITaskItemProps) {
       >
         <div>TODO</div>
       </Drawer>
+
+      <TaskForm
+        task={task}
+        open={openTaskForm}
+        onCloseFormModal={() => setOpenTaskForm(false)}
+        onSubmitSucceed={() => {
+          setOpenTaskForm(false)
+          props.onUpdated && props.onUpdated(task)
+        }}
+      />
+
+      <ParticipateForm
+        open={openParticipateForm}
+        onCloseFormModal={() => setOpenParticipateForm(false)}
+        onSubmitSucceed={() => {
+          setOpenParticipateForm(false)
+          props.onUpdated && props.onUpdated(task)
+        }}
+      />
     </>
   )
 }

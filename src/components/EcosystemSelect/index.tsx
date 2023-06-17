@@ -1,19 +1,31 @@
 import { Select, SelectProps } from 'antd'
 import { IEcosystem } from '../../types/entities/ecosystem'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getEcosystems } from '../../api/ecosystem'
 
-export default function EcosystemSelect(props: SelectProps) {
-  const [data, setData] = useState<IEcosystem[]>([])
+interface IEcosystemSelectProps extends SelectProps {
+  ecosystemList?: IEcosystem[]
+}
+
+export default function EcosystemSelect(props: IEcosystemSelectProps) {
+  const [ecosystemList, setEcosystemList] = useState<IEcosystem[]>(
+    props.ecosystemList ?? []
+  )
+
+  useEffect(() => {
+    if (props.ecosystemList && props.ecosystemList.length > 0) {
+      setEcosystemList(props.ecosystemList)
+    }
+  }, [props.ecosystemList])
 
   const onSearch = (value: string) => {
     if (!value) {
-      return setData([])
+      return setEcosystemList([])
     }
     getEcosystems({
       name: value
     }).then((list) => {
-      setData(list)
+      setEcosystemList(list)
     })
   }
   return (
@@ -24,10 +36,10 @@ export default function EcosystemSelect(props: SelectProps) {
       showArrow={false}
       {...props}
       onSearch={onSearch}
-      options={(data || []).map((item) => ({
-        label: item.name,
-        value: item.id
+      options={(ecosystemList || []).map((ecosystem) => ({
+        label: ecosystem.name,
+        value: ecosystem.id
       }))}
-    ></Select>
+    />
   )
 }
