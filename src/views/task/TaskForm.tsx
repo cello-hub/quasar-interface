@@ -3,11 +3,12 @@ import UniModalForm from '../../components/UniModalForm'
 import UniModal from '../../components/UniModal'
 import { useEffect, useState } from 'react'
 import { useForm } from 'antd/es/form/Form'
-import { IEcosystem } from '../../types/entities/ecosystem'
 import { ITask } from '../../types/entities/task'
 import { ISaveTaskParams } from '../../api/task/types'
 import { saveTask } from '../../api/task'
 import EcosystemSelect from '../../components/EcosystemSelect'
+import dayjs from '../../utils/dayjs'
+import locale from 'antd/locale/zh_CN'
 
 interface IClusterProps {
   open: boolean
@@ -56,18 +57,19 @@ export default function TaskForm(props: IClusterProps) {
       <UniModalForm
         form={form}
         initialValues={{
+          ...task,
           finished: false,
-          ecosystemId: task?.ecosystem?.id,
-          ...task
+          date: dayjs(),
+          ecosystemId: task?.ecosystem?.id
         }}
       >
         <Form.Item label='Name' name='name'>
           <Input />
         </Form.Item>
 
-        {/* <Form.Item label='Date' name='date'>
+        <Form.Item label='Date' name='date'>
           <DatePicker className='w-[100%]' placeholder='' />
-        </Form.Item> */}
+        </Form.Item>
 
         <Form.Item label='Ecosystem' name='ecosystemId'>
           <EcosystemSelect
