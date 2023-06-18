@@ -94,7 +94,6 @@ export default function TaskItem(props: ITaskItemProps) {
           />
         </div>
       </div>
-
       <Drawer
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
