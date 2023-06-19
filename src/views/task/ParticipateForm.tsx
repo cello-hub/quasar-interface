@@ -22,20 +22,24 @@ export default function ParticipateForm(props: IParticipateFormProps) {
   const [form] = useForm<ITaskParticipateParams>()
   const clusterOptions = useClusterStore((state) => state.clusterOptions)
 
-  const [data, setData] = useState<IEcosystem[]>([])
-
   useEffect(() => {
     form.resetFields()
   }, [task])
 
   const onOk = async () => {
-    // setSaving(true)
-    const params = form.getFieldsValue()
-    console.log(params)
-    executeParticipate({
-      taskId: task.id,
-      clusterIds: params.clusterIds
-    })
+    setSaving(true)
+
+    try {
+      const params = form.getFieldsValue()
+      await executeParticipate({
+        taskId: task.id,
+        clusterIds: params.clusterIds
+      })
+      setSaving(false)
+      props.onSubmitSucceed()
+    } catch (error) {
+      setSaving(false)
+    }
   }
 
   return (

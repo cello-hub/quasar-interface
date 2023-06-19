@@ -5,7 +5,7 @@ import { CloseIcon } from '../../components/Icon/CloseIcon'
 import { saveTask } from '../../api/task'
 import dayjs from '../../utils/dayjs'
 import EditIcon from '../../components/Icon/EditIcon'
-import ParticipateForm from '../../components/ParticipateForm'
+import ParticipateForm from './ParticipateForm'
 import TaskForm from './TaskForm'
 
 interface ITaskItemProps {
@@ -22,27 +22,31 @@ export default function TaskItem(props: ITaskItemProps) {
   const [openParticipateForm, setOpenParticipateForm] = useState(false)
 
   const onReverseFinished = async () => {
-    if (task.ecosystem) {
-      setOpenParticipateForm(true)
-    } else {
-      await saveTask({
-        id: task.id,
-        finished: !task.finished
-      })
-    }
+    await saveTask({
+      id: task.id,
+      finished: !task.finished
+    })
     props.onUpdated && props.onUpdated(task)
   }
 
   const onCheck = async () => {
-    if (!task.finished && !task.ecosystem) {
-      Modal.confirm({
-        title: 'Are you sure to complete?',
-        onOk: async () => {
-          onReverseFinished()
-        }
-      })
+    if (task.ecosystem) {
+      if (task.finished) {
+        onReverseFinished()
+      } else {
+        setOpenParticipateForm(true)
+      }
     } else {
-      onReverseFinished()
+      if (task.finished) {
+        onReverseFinished()
+      } else {
+        Modal.confirm({
+          title: 'Are you sure to complete?',
+          onOk: async () => {
+            onReverseFinished()
+          }
+        })
+      }
     }
   }
   const [openTaskForm, setOpenTaskForm] = useState(false)
