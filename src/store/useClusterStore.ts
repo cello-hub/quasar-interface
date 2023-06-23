@@ -4,7 +4,7 @@ import { ICluster } from '../types/entities/cluster'
 
 interface IClusterState {
   clusterList: ICluster[]
-  clusterOptions: { label: string; value: number }[]
+  clusterOptions: { label: string; value: number; disabled: boolean }[]
   updatClusterList: () => void
 }
 
@@ -18,7 +18,8 @@ const useClusterStore = create<IClusterState>()((set) => ({
       clusterOptions: clusterList.map((cluster) => {
         return {
           label: cluster.name,
-          value: cluster.id
+          value: cluster.id,
+          disabled: false
         }
       })
     })

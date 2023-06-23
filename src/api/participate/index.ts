@@ -1,10 +1,10 @@
-import { ITask } from '../../types/entities/task'
+import { IParticipate } from '../../types/entities/participate'
 import Http from '../http'
 import { ISaveParticipateParams, IParticipateListParams } from './types'
 
 export const getParticipateList = (
   data?: IParticipateListParams
-): Promise<ITask[]> => {
+): Promise<IParticipate[]> => {
   return Http.get({
     url: '/participate',
     data

@@ -7,6 +7,7 @@ import dayjs from '../../utils/dayjs'
 import EditIcon from '../../components/Icon/EditIcon'
 import ParticipateForm from './ParticipateForm'
 import TaskForm from './TaskForm'
+import { ISaveTaskParams } from '../../api/task/types'
 
 interface ITaskItemProps {
   task: ITask
@@ -22,10 +23,14 @@ export default function TaskItem(props: ITaskItemProps) {
   const [openParticipateForm, setOpenParticipateForm] = useState(false)
 
   const onReverseFinished = async () => {
-    await saveTask({
+    const params: ISaveTaskParams = {
       id: task.id,
       finished: !task.finished
-    })
+    }
+    if (task.ecosystem) {
+      params.ecosystemId = task.ecosystem.id
+    }
+    await saveTask(params)
     props.onUpdated && props.onUpdated(task)
   }
 
