@@ -58,7 +58,7 @@ export default function EcosystemForm(props: IEcosystemProps) {
         form={form}
         initialValues={{
           finished: true,
-          chain_id: ecosystem?.chain.id,
+          chain_id: ecosystem?.chain?.id,
           ...ecosystem
         }}
       >
