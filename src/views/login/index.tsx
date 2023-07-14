@@ -2,12 +2,19 @@ import { Button } from 'antd'
 import styles from './index.module.css'
 import { Connector, useAccount, useConnect, useSignMessage } from 'wagmi'
 import { login } from '../../api/auth'
+import { useEffect } from 'react'
 
 export default function Login() {
-  const { connectAsync, connectors, isLoading, pendingConnector } = useConnect()
+  const { connect, connectors, isLoading, pendingConnector } = useConnect()
 
-  const { address, isConnected } = useAccount()
+  const { address, isConnected, connector } = useAccount()
   const { signMessageAsync } = useSignMessage()
+
+  useEffect(() => {
+    if (isConnected && address && connector) {
+      onSignMessage()
+    }
+  }, [isConnected, address, connector])
 
   const onSignMessage = () => {
     const message = `Login to quasar.sys. \n${new Date().getTime()}`
@@ -27,12 +34,7 @@ export default function Login() {
   }
 
   const onLogin = async (connector: Connector) => {
-    if (isConnected) {
-      onSignMessage()
-    } else {
-      await connectAsync({ connector })
-      onSignMessage()
-    }
+    connect({ connector })
   }
 
   return (
