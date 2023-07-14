@@ -1,4 +1,4 @@
-import { Button, Space } from 'antd'
+import { Button, Select, Space } from 'antd'
 import UniTable from '../../components/UniTable'
 import { ColumnsType } from 'antd/es/table'
 import { ISocial } from '../../types/entities/social'
@@ -11,11 +11,14 @@ import ErrorIcon from '../../components/Icon/ErrorIcon'
 import EditIcon from '../../components/Icon/EditIcon'
 import KeyIcon from '../../components/Icon/KeyIcon'
 import CreateIcon from '../../components/Icon/CreateIcon'
+import { SocialPlatfromOptions } from '../../constants/social-platform'
 
 export default function Social() {
   const [socialAccounts, setSocialAccounts] = useState<ISocial[]>([])
-  const getList = async () => {
-    const socialAccounts = await getSocialAccounts()
+  const getList = async (platform?: string) => {
+    const socialAccounts = await getSocialAccounts({
+      platform
+    })
     setSocialAccounts(socialAccounts)
   }
   useEffect(() => {
@@ -106,6 +109,7 @@ export default function Social() {
     const secret = await getPassword(social.id)
     setSecret(secret)
   }
+
   return (
     <div>
       <Button
@@ -116,9 +120,24 @@ export default function Social() {
           setIsOpenForm(true)
           setEditableSocial(undefined)
         }}
+      />
+      <div
+        style={{
+          marginBottom: '10px'
+        }}
       >
-        Create Social Account
-      </Button>
+        <Select
+          style={{
+            width: 200
+          }}
+          allowClear
+          placeholder='Choose Platform'
+          onChange={(platform: string | undefined) => {
+            getList(platform || '')
+          }}
+          options={SocialPlatfromOptions}
+        />
+      </div>
 
       <UniTable columns={columns} dataSource={socialAccounts} rowKey={'id'} />
 

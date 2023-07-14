@@ -1,10 +1,17 @@
 import { ISocial } from '../../types/entities/social'
 import Http from '../http'
-import { ICreateSocialParams, IUpdateSocialParams } from './types'
+import {
+  ICreateSocialParams,
+  ISocialListParams,
+  IUpdateSocialParams
+} from './types'
 
-export const getSocialAccounts = (): Promise<ISocial[]> => {
+export const getSocialAccounts = (
+  params: ISocialListParams
+): Promise<ISocial[]> => {
   return Http.get({
-    url: '/social'
+    url: '/social',
+    data: params
   })
 }
 
