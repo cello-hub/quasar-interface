@@ -14,7 +14,8 @@ export const SocialPlatfrom = [
   'Aws Cloud',
   'AdsPower',
   'Cloudflare',
-  'Onenet'
+  'Onenet',
+  'Docker'
 ] as const
 
 export type SocialPlatfromInOne = (typeof SocialPlatfrom)[number]
